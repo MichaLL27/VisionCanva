@@ -7,12 +7,14 @@ import colorfulImage from "@assets/generated_images/colorful_energetic_vision_bo
 import spiritualImage from "@assets/generated_images/calm_spiritual_vision_board_collage.png";
 import { useToast } from "@/hooks/use-toast";
 import { Layout } from "@/components/Layout";
+import { useLocalization } from "@/lib/localization";
 
 export default function Result() {
   const [location, setLocation] = useLocation();
   const { toast } = useToast();
   const searchParams = new URLSearchParams(window.location.search);
   const style = searchParams.get("style") || "modern";
+  const { t } = useLocalization();
   
   // Determine image based on style
   const getImage = () => {
@@ -49,7 +51,7 @@ export default function Result() {
             </motion.div>
 
             <div className="bg-white p-8 rounded-3xl shadow-sm border border-border/50">
-              <h3 className="font-display font-bold text-xl mb-4 text-primary">Your Vision</h3>
+              <h3 className="font-display font-bold text-xl mb-4 text-primary">{t("result.yourVision")}</h3>
               <p className="text-muted-foreground leading-relaxed">
                 "A future where financial freedom allows for spontaneous travel and deep creative work. Surrounded by nature, practicing daily mindfulness, and cultivating meaningful connections with loved ones. Radiant health and abundant energy flow through every day."
               </p>
@@ -59,7 +61,7 @@ export default function Result() {
           {/* Actions Column */}
           <div className="lg:col-span-4 space-y-6">
             <div className="bg-white p-6 rounded-3xl shadow-xl border border-primary/10 sticky top-6">
-              <h2 className="font-display font-bold text-2xl mb-6">Next Steps</h2>
+              <h2 className="font-display font-bold text-2xl mb-6">{t("result.nextSteps")}</h2>
               
               <div className="space-y-4">
                 <Link href="/print/options">
@@ -67,7 +69,7 @@ export default function Result() {
                     className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-3 cursor-pointer"
                   >
                     <Printer className="w-5 h-5" />
-                    Send to Print
+                    {t("result.sendToPrint")}
                   </button>
                 </Link>
                 
@@ -76,7 +78,7 @@ export default function Result() {
                   className="w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 cursor-pointer"
                 >
                   <RefreshCw className="w-5 h-5" />
-                  Generate Variation
+                  {t("result.generateVariation")}
                 </button>
                 
                 <button 
@@ -84,24 +86,24 @@ export default function Result() {
                   className="w-full bg-transparent hover:bg-muted text-muted-foreground font-medium py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-3 text-sm cursor-pointer"
                 >
                   <Download className="w-4 h-4" />
-                  Download as PDF
+                  {t("result.downloadPdf")}
                 </button>
               </div>
 
               <div className="mt-8 pt-8 border-t border-border">
-                <h4 className="font-medium text-sm text-muted-foreground mb-4">Print Includes:</h4>
+                <h4 className="font-medium text-sm text-muted-foreground mb-4">{t("result.printIncludes")}</h4>
                 <ul className="space-y-3 text-sm">
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-green-500" />
-                    High-quality matte photo paper
+                    {t("result.include.paper")}
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-green-500" />
-                    Free shipping worldwide
+                    {t("result.include.shipping")}
                   </li>
                   <li className="flex items-center gap-2">
                     <Check className="w-4 h-4 text-green-500" />
-                    Secure packaging
+                    {t("result.include.packaging")}
                   </li>
                 </ul>
               </div>

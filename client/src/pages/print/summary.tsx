@@ -1,12 +1,16 @@
 import { Layout } from "@/components/Layout";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
-import { ArrowLeft, Check, CreditCard, Lock } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CreditCard, Lock } from "lucide-react";
 import modernImage from "@assets/generated_images/modern_clean_vision_board_collage.png";
+import { useLocalization } from "@/lib/localization";
 
 export default function Summary() {
   const [_, setLocation] = useLocation();
   const [isProcessing, setIsProcessing] = useState(false);
+  const { t, language } = useLocalization();
+
+  const ArrowIcon = language === "he" ? ArrowRight : ArrowLeft;
 
   const handlePayment = () => {
     setIsProcessing(true);
@@ -20,7 +24,7 @@ export default function Summary() {
       <div className="max-w-4xl mx-auto px-6 py-12 w-full">
         <Link href="/print/shipping">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 cursor-pointer">
-            <ArrowLeft className="w-4 h-4" /> Back to shipping
+            <ArrowIcon className="w-4 h-4" /> {t("common.back")}
           </span>
         </Link>
 
@@ -28,8 +32,8 @@ export default function Summary() {
           {/* Summary Column */}
           <div className="md:col-span-7 space-y-8">
             <div>
-              <h1 className="text-3xl font-display font-bold mb-4">Order Summary</h1>
-              <p className="text-muted-foreground">Review your order before payment.</p>
+              <h1 className="text-3xl font-display font-bold mb-4">{t("print.summary.title")}</h1>
+              <p className="text-muted-foreground">{t("print.summary.subtitle")}</p>
             </div>
 
             <div className="bg-white rounded-2xl border border-border overflow-hidden shadow-sm">
@@ -59,15 +63,15 @@ export default function Summary() {
             </div>
 
             <div className="bg-muted/30 p-6 rounded-2xl">
-              <h4 className="font-bold text-sm mb-4">Print Includes:</h4>
+              <h4 className="font-bold text-sm mb-4">{t("result.printIncludes")}</h4>
               <ul className="space-y-3 text-sm text-muted-foreground">
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
-                  High-quality matte photo paper
+                  {t("result.include.paper")}
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
-                  Secure packaging
+                  {t("result.include.packaging")}
                 </li>
                 <li className="flex items-center gap-2">
                   <Check className="w-4 h-4 text-green-500" />
@@ -92,7 +96,7 @@ export default function Summary() {
                <div className="flex items-start gap-3 mb-6">
                 <input type="checkbox" required className="mt-1 w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary" id="terms" />
                 <label htmlFor="terms" className="text-xs text-muted-foreground cursor-pointer leading-tight">
-                  I agree to the <Link href="/legal/terms"><span className="text-primary hover:underline">Terms of Use</span></Link> and <Link href="/legal/refund"><span className="text-primary hover:underline">Refund Policy</span></Link>. I understand this is a custom printed product.
+                  {t("auth.agreeTerms")} <Link href="/legal/terms"><span className="text-primary hover:underline">{t("footer.terms")}</span></Link> {t("auth.and")} <Link href="/legal/refund"><span className="text-primary hover:underline">{t("footer.refund")}</span></Link>.
                 </label>
               </div>
 
@@ -101,7 +105,7 @@ export default function Summary() {
                 disabled={isProcessing}
                 className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                >
-                 {isProcessing ? "Processing..." : "Pay and send to print"}
+                 {isProcessing ? t("common.loading") : t("print.payButton")}
                </button>
              </div>
           </div>

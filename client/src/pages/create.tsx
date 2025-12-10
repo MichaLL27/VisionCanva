@@ -3,34 +3,39 @@ import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
 import { Layout } from "@/components/Layout";
-
-// Mock Data
-const LIFE_AREAS = [
-  "Money & Wealth", 
-  "Career & Business", 
-  "Love & Relationships", 
-  "Health & Fitness", 
-  "Family & Home", 
-  "Spirituality", 
-  "Social Life & Fun",
-  "Travel & Adventure"
-];
-
-const STYLES = [
-  { id: "modern", name: "Modern & Clean", description: "Minimalist, organized, and fresh." },
-  { id: "colorful", name: "Colorful & Energetic", description: "Bold, vibrant, and high energy." },
-  { id: "spiritual", name: "Calm & Spiritual", description: "Soft, organic, and peaceful." },
-];
+import { useLocalization } from "@/lib/localization";
 
 export default function Create() {
   const [_, setLocation] = useLocation();
   const [step, setStep] = useState(1);
   const [isGenerating, setIsGenerating] = useState(false);
+  const { t, language } = useLocalization();
+  
+  // Icons that need mirroring
+  const NextIcon = language === "he" ? ArrowLeft : ArrowRight;
+  const BackIcon = language === "he" ? ArrowRight : ArrowLeft;
   
   // Form State
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
+
+  const LIFE_AREAS = [
+    { id: "money", label: t("create.area.money") },
+    { id: "career", label: t("create.area.career") },
+    { id: "love", label: t("create.area.love") },
+    { id: "health", label: t("create.area.health") },
+    { id: "family", label: t("create.area.family") },
+    { id: "spirituality", label: t("create.area.spirituality") },
+    { id: "social", label: t("create.area.social") },
+    { id: "travel", label: t("create.area.travel") }
+  ];
+
+  const STYLES = [
+    { id: "modern", name: t("create.style.modern"), description: t("create.style.modernDesc") },
+    { id: "colorful", name: t("create.style.colorful"), description: t("create.style.colorfulDesc") },
+    { id: "spiritual", name: t("create.style.spiritual"), description: t("create.style.spiritualDesc") },
+  ];
 
   const toggleArea = (area: string) => {
     if (selectedAreas.includes(area)) {
@@ -78,9 +83,9 @@ export default function Create() {
             </div>
             
             <div className="space-y-4">
-              <h2 className="text-2xl font-display font-semibold">Manifesting your vision...</h2>
+              <h2 className="text-2xl font-display font-semibold">{t("loading.manifesting")}</h2>
               <p className="text-muted-foreground">
-                Our AI is curating the perfect images to align with your goals for {selectedAreas.slice(0, 3).join(", ")}...
+                {t("loading.curating")}
               </p>
             </div>
 
@@ -108,7 +113,7 @@ export default function Create() {
             disabled={step === 1}
             className={`p-2 rounded-full hover:bg-secondary transition-colors ${step === 1 ? 'opacity-0 pointer-events-none' : ''}`}
           >
-            <ArrowLeft className="w-5 h-5" />
+            <BackIcon className="w-5 h-5" />
           </button>
           
           <div className="flex gap-2">
@@ -129,21 +134,21 @@ export default function Create() {
             {step === 1 && (
               <motion.div
                 key="step1"
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: language === "he" ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                exit={{ opacity: 0, x: language === "he" ? 20 : -20 }}
                 className="flex-1 flex flex-col"
               >
-                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Focus Areas</h1>
-                <p className="text-muted-foreground text-lg mb-8">Which areas of your life do you want to elevate this year?</p>
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("create.focusAreas")}</h1>
+                <p className="text-muted-foreground text-lg mb-8">{t("create.focusSubtitle")}</p>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {LIFE_AREAS.map((area) => (
                     <label 
-                      key={area}
+                      key={area.id}
                       className={`
                         flex items-center gap-4 p-4 rounded-xl border-2 cursor-pointer transition-all
-                        ${selectedAreas.includes(area) 
+                        ${selectedAreas.includes(area.label) 
                           ? 'border-primary bg-primary/5 shadow-md' 
                           : 'border-transparent bg-white shadow-sm hover:border-primary/30'}
                       `}
@@ -151,16 +156,16 @@ export default function Create() {
                       <input 
                         type="checkbox" 
                         className="hidden"
-                        checked={selectedAreas.includes(area)}
-                        onChange={() => toggleArea(area)}
+                        checked={selectedAreas.includes(area.label)}
+                        onChange={() => toggleArea(area.label)}
                       />
                       <div className={`
                         w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors
-                        ${selectedAreas.includes(area) ? 'border-primary bg-primary text-white' : 'border-muted-foreground/30'}
+                        ${selectedAreas.includes(area.label) ? 'border-primary bg-primary text-white' : 'border-muted-foreground/30'}
                       `}>
-                        {selectedAreas.includes(area) && <CheckIcon className="w-3 h-3" />}
+                        {selectedAreas.includes(area.label) && <CheckIcon className="w-3 h-3" />}
                       </div>
-                      <span className="font-medium text-lg">{area}</span>
+                      <span className="font-medium text-lg">{area.label}</span>
                     </label>
                   ))}
                 </div>
@@ -170,19 +175,19 @@ export default function Create() {
             {step === 2 && (
               <motion.div
                 key="step2"
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: language === "he" ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                exit={{ opacity: 0, x: language === "he" ? 20 : -20 }}
                 className="flex-1 flex flex-col"
               >
-                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Your Vision</h1>
-                <p className="text-muted-foreground text-lg mb-8">Describe how your dream life looks and feels one year from now. Be specific.</p>
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("create.vision")}</h1>
+                <p className="text-muted-foreground text-lg mb-8">{t("create.visionSubtitle")}</p>
                 
                 <div className="relative flex-1 min-h-[300px]">
                   <textarea
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    placeholder="I am waking up in a sun-filled bedroom overlooking the ocean. I feel calm, healthy, and financially free. I run a successful creative business..."
+                    placeholder={t("create.visionPlaceholder")}
                     className="w-full h-full p-6 rounded-2xl border-2 border-transparent bg-white shadow-sm focus:border-primary focus:ring-0 resize-none text-lg leading-relaxed placeholder:text-muted-foreground/50 transition-all"
                   />
                 </div>
@@ -192,13 +197,13 @@ export default function Create() {
             {step === 3 && (
               <motion.div
                 key="step3"
-                initial={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, x: language === "he" ? -20 : 20 }}
                 animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                exit={{ opacity: 0, x: language === "he" ? 20 : -20 }}
                 className="flex-1 flex flex-col"
               >
-                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Choose a Style</h1>
-                <p className="text-muted-foreground text-lg mb-8">How should your vision board feel?</p>
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("create.style")}</h1>
+                <p className="text-muted-foreground text-lg mb-8">{t("create.styleSubtitle")}</p>
                 
                 <div className="space-y-4">
                   {STYLES.map((style) => (
@@ -206,7 +211,7 @@ export default function Create() {
                       key={style.id}
                       onClick={() => setSelectedStyle(style.id)}
                       className={`
-                        w-full text-left p-6 rounded-2xl border-2 transition-all flex items-center justify-between group
+                        w-full text-start p-6 rounded-2xl border-2 transition-all flex items-center justify-between group
                         ${selectedStyle === style.id 
                           ? 'border-primary bg-primary/5 shadow-md' 
                           : 'border-transparent bg-white shadow-sm hover:border-primary/30'}
@@ -245,8 +250,8 @@ export default function Create() {
                   : 'bg-primary text-white hover:bg-primary/90 hover:shadow-xl hover:-translate-y-0.5'}
               `}
             >
-              {step === 3 ? "Create My Vision Board" : "Continue"}
-              {step !== 3 && <ArrowRight className="w-5 h-5" />}
+              {step === 3 ? t("create.button") : t("common.continue")}
+              {step !== 3 && <NextIcon className="w-5 h-5" />}
             </button>
           </div>
         </main>

@@ -1,13 +1,17 @@
 import { Link, useLocation } from "wouter";
 import { Layout } from "@/components/Layout";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useState } from "react";
+import { useLocalization } from "@/lib/localization";
 
 export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [_, setLocation] = useLocation();
+  const { t, language } = useLocalization();
+
+  const ArrowIcon = language === "he" ? ArrowRight : ArrowLeft;
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,18 +25,18 @@ export default function SignUp() {
         <div className="w-full max-w-md space-y-8">
           <Link href="/">
             <span className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 cursor-pointer">
-              <ArrowLeft className="w-4 h-4" /> Back to home
+              <ArrowIcon className="w-4 h-4" /> {t("common.back")}
             </span>
           </Link>
           
           <div className="text-center">
-            <h1 className="text-3xl font-display font-bold">Create your account</h1>
-            <p className="text-muted-foreground mt-2">Start creating your vision boards today</p>
+            <h1 className="text-3xl font-display font-bold">{t("auth.createAccount")}</h1>
+            <p className="text-muted-foreground mt-2">{t("auth.createSubtitle")}</p>
           </div>
 
           <form onSubmit={handleSignUp} className="space-y-6">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Full Name</label>
+              <label className="text-sm font-medium">{t("auth.fullName")}</label>
               <input 
                 type="text" 
                 required 
@@ -44,7 +48,7 @@ export default function SignUp() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Email</label>
+              <label className="text-sm font-medium">{t("auth.email")}</label>
               <input 
                 type="email" 
                 required 
@@ -56,7 +60,7 @@ export default function SignUp() {
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium">Password</label>
+              <label className="text-sm font-medium">{t("auth.password")}</label>
               <input 
                 type="password" 
                 required 
@@ -70,19 +74,19 @@ export default function SignUp() {
             <div className="flex items-start gap-3">
               <input type="checkbox" required className="mt-1 w-4 h-4 text-primary rounded border-gray-300 focus:ring-primary" id="terms" />
               <label htmlFor="terms" className="text-sm text-muted-foreground">
-                I agree to the <Link href="/legal/terms"><span className="text-primary hover:underline cursor-pointer">Terms of Use</span></Link> and <Link href="/legal/privacy"><span className="text-primary hover:underline cursor-pointer">Privacy Policy</span></Link>
+                {t("auth.agreeTerms")} <Link href="/legal/terms"><span className="text-primary hover:underline cursor-pointer">{t("footer.terms")}</span></Link> {t("auth.and")} <Link href="/legal/privacy"><span className="text-primary hover:underline cursor-pointer">{t("footer.privacy")}</span></Link>
               </label>
             </div>
 
             <button type="submit" className="w-full bg-primary text-white font-bold py-4 rounded-xl shadow-lg hover:bg-primary/90 transition-all">
-              Create account
+              {t("auth.createAccount")}
             </button>
           </form>
 
           <p className="text-center text-sm text-muted-foreground">
-            Already have an account?{" "}
+            {t("auth.alreadyAccount")}{" "}
             <Link href="/auth/sign-in">
-              <span className="text-primary font-medium hover:underline cursor-pointer">Sign in</span>
+              <span className="text-primary font-medium hover:underline cursor-pointer">{t("nav.signIn")}</span>
             </Link>
           </p>
         </div>

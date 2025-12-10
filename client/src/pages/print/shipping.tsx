@@ -2,9 +2,11 @@ import { Layout } from "@/components/Layout";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useLocalization } from "@/lib/localization";
 
 export default function Shipping() {
   const [_, setLocation] = useLocation();
+  const { t, language } = useLocalization();
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -16,6 +18,9 @@ export default function Shipping() {
     notes: ""
   });
 
+  const ArrowIcon = language === "he" ? ArrowRight : ArrowLeft;
+  const NextIcon = language === "he" ? ArrowLeft : ArrowRight;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setLocation("/print/summary");
@@ -26,13 +31,13 @@ export default function Shipping() {
       <div className="max-w-3xl mx-auto px-6 py-12 w-full">
         <Link href="/print/options">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 cursor-pointer">
-            <ArrowLeft className="w-4 h-4" /> Back to size selection
+            <ArrowIcon className="w-4 h-4" /> {t("common.back")}
           </span>
         </Link>
 
         <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Shipping details</h1>
-          <p className="text-muted-foreground text-lg">We'll send your printed vision board straight to your door.</p>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("print.shipping.title")}</h1>
+          <p className="text-muted-foreground text-lg">{t("print.shipping.subtitle")}</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
@@ -85,7 +90,7 @@ export default function Shipping() {
 
           <div className="pt-4">
             <button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-xl shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2">
-              Continue to summary <ArrowRight className="w-5 h-5" />
+              {t("common.continue")} <NextIcon className="w-5 h-5" />
             </button>
           </div>
         </form>

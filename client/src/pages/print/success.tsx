@@ -2,8 +2,11 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { CheckCircle2, Home, Package } from "lucide-react";
 import { Layout } from "@/components/Layout";
+import { useLocalization } from "@/lib/localization";
 
 export default function PrintSuccess() {
+  const { t } = useLocalization();
+  
   return (
     <Layout>
       <div className="flex-1 flex flex-col items-center justify-center p-6 text-center">
@@ -22,9 +25,9 @@ export default function PrintSuccess() {
           </div>
           
           <div className="space-y-4">
-            <h1 className="text-4xl font-display font-bold">Your print order is on its way ✨</h1>
+            <h1 className="text-4xl font-display font-bold">{t("print.success.title")}</h1>
             <p className="text-xl text-muted-foreground">
-              We’ve received your order and sent it to our print studio. You’ll receive an email with tracking details soon.
+              {t("print.success.text")}
             </p>
           </div>
 
@@ -32,13 +35,13 @@ export default function PrintSuccess() {
             <Link href="/account">
               <button className="flex-1 bg-white border border-border hover:bg-gray-50 text-foreground font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm">
                 <Package className="w-5 h-5" />
-                View my orders
+                {t("print.success.viewOrders")}
               </button>
             </Link>
             
             <Link href="/create">
               <button className="flex-1 bg-primary hover:bg-primary/90 text-white font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg">
-                Create another
+                {t("print.success.createAnother")}
               </button>
             </Link>
           </div>

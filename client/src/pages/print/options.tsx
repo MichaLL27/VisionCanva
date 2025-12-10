@@ -2,6 +2,7 @@ import { Layout } from "@/components/Layout";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
 import { ArrowLeft, ArrowRight, Check } from "lucide-react";
+import { useLocalization } from "@/lib/localization";
 
 const SIZES = [
   { id: "a4", name: "A4 Poster", dimensions: "21 x 29.7 cm", description: "Small & simple", price: 19, type: "paper" },
@@ -15,19 +16,23 @@ const SIZES = [
 export default function PrintOptions() {
   const [selectedSize, setSelectedSize] = useState("a3");
   const [_, setLocation] = useLocation();
+  const { t, language } = useLocalization();
+
+  const ArrowIcon = language === "he" ? ArrowRight : ArrowLeft;
+  const NextIcon = language === "he" ? ArrowLeft : ArrowRight;
 
   return (
     <Layout>
       <div className="max-w-4xl mx-auto px-6 py-12 w-full">
         <Link href="/result">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8 cursor-pointer">
-            <ArrowLeft className="w-4 h-4" /> Back to vision board
+            <ArrowIcon className="w-4 h-4" /> {t("common.back")}
           </span>
         </Link>
 
         <div className="text-center mb-12">
-          <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">Choose your print size</h1>
-          <p className="text-muted-foreground text-lg">Select how big you want your vision board on the wall.</p>
+          <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("print.options.title")}</h1>
+          <p className="text-muted-foreground text-lg">{t("print.options.subtitle")}</p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
@@ -78,7 +83,7 @@ export default function PrintOptions() {
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link href="/print/shipping">
             <button className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-white font-bold py-4 px-12 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
-              Continue to Details <ArrowRight className="w-5 h-5" />
+              {t("common.continue")} <NextIcon className="w-5 h-5" />
             </button>
           </Link>
         </div>

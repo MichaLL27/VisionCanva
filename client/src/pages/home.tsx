@@ -1,12 +1,18 @@
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft } from "lucide-react"; // Import both arrows
 import { Layout } from "@/components/Layout";
 import modernImage from "@assets/generated_images/modern_clean_vision_board_collage.png";
 import colorfulImage from "@assets/generated_images/colorful_energetic_vision_board_collage.png";
 import spiritualImage from "@assets/generated_images/calm_spiritual_vision_board_collage.png";
+import { useLocalization } from "@/lib/localization";
 
 export default function Home() {
+  const { t, language } = useLocalization();
+  
+  // Choose the correct arrow based on direction
+  const ArrowIcon = language === "he" ? ArrowLeft : ArrowRight;
+
   return (
     <Layout>
       <div className="bg-background text-foreground overflow-hidden">
@@ -23,21 +29,21 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              AI-Powered Manifestation
+              {t("landing.badge")}
             </div>
             
             <h1 className="text-5xl md:text-7xl font-display font-semibold leading-[1.1] tracking-tight">
-              Create your <span className="text-gradient">personal vision board</span> with AI.
+              {t("landing.title")}
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed max-w-lg">
-              Stop cutting magazines. Answer a few questions about your dreams, and get a beautiful, print-ready vision board in seconds.
+              {t("landing.subtitle")}
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 pt-4">
               <Link href="/create">
                 <button className="bg-primary hover:bg-primary/90 text-white font-medium text-lg py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
-                  Start Now <ArrowRight className="w-5 h-5" />
+                  {t("landing.cta")} <ArrowIcon className="w-5 h-5" />
                 </button>
               </Link>
             </div>
@@ -45,11 +51,11 @@ export default function Home() {
             <div className="pt-8 flex gap-8 text-sm text-muted-foreground">
               <div className="flex items-center gap-2">
                 <div className="bg-green-100 p-1 rounded-full"><Check className="w-3 h-3 text-green-600" /></div>
-                <span>Ready in 30 seconds</span>
+                <span>{t("landing.feature.ready")}</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-green-100 p-1 rounded-full"><Check className="w-3 h-3 text-green-600" /></div>
-                <span>High-quality print</span>
+                <span>{t("landing.feature.print")}</span>
               </div>
             </div>
           </motion.div>

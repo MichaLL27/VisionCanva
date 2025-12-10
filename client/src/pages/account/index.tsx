@@ -1,16 +1,22 @@
 import { Layout } from "@/components/Layout";
 import { Link, useLocation } from "wouter";
 import { useState } from "react";
-import { Download, Eye, Package, Calendar, LogOut } from "lucide-react";
+import { Download, Eye, Package, Calendar, LogOut, Globe } from "lucide-react";
 import modernImage from "@assets/generated_images/modern_clean_vision_board_collage.png";
 import colorfulImage from "@assets/generated_images/colorful_energetic_vision_board_collage.png";
+import { useLocalization } from "@/lib/localization";
 
 export default function Account() {
   const [activeTab, setActiveTab] = useState<'boards' | 'orders'>('boards');
   const [_, setLocation] = useLocation();
+  const { t, language, setLanguage } = useLocalization();
 
   const handleLogout = () => {
     setLocation("/");
+  };
+
+  const toggleLanguage = () => {
+    setLanguage(language === "he" ? "en" : "he");
   };
 
   return (
@@ -19,12 +25,21 @@ export default function Account() {
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 gap-4">
           <div>
-            <h1 className="text-3xl font-display font-bold">My Account</h1>
-            <p className="text-muted-foreground">Welcome back, Jane</p>
+            <h1 className="text-3xl font-display font-bold">{t("nav.myAccount")}</h1>
+            <p className="text-muted-foreground">{t("account.welcome")}, Jane</p>
           </div>
-          <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">
-            <LogOut className="w-4 h-4" /> Log out
-          </button>
+          <div className="flex gap-4">
+             <button 
+              onClick={toggleLanguage}
+              className="flex items-center gap-2 text-sm font-medium hover:text-primary transition-colors"
+            >
+              <Globe className="w-4 h-4" />
+              {language === "he" ? "Switch to English" : "עבור לעברית"}
+            </button>
+            <button onClick={handleLogout} className="flex items-center gap-2 text-sm font-medium text-destructive hover:text-destructive/80 transition-colors">
+              <LogOut className="w-4 h-4" /> {t("nav.signOut")}
+            </button>
+          </div>
         </div>
 
         {/* Tabs */}
@@ -37,7 +52,7 @@ export default function Account() {
                 : 'border-transparent text-muted-foreground hover:text-foreground'
             }`}
           >
-            My Vision Boards
+            {t("account.myBoards")}
           </button>
           <button 
             onClick={() => setActiveTab('orders')}
@@ -47,7 +62,7 @@ export default function Account() {
                 : 'border-transparent text-muted-foreground hover:text-foreground'
             }`}
           >
-            My Orders
+            {t("account.myOrders")}
           </button>
         </div>
 
@@ -72,7 +87,7 @@ export default function Account() {
                 <div className="flex gap-2">
                   <Link href="/result?style=modern">
                     <button className="flex-1 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
-                      <Eye className="w-4 h-4" /> View
+                      <Eye className="w-4 h-4" /> {t("account.view")}
                     </button>
                   </Link>
                   <button className="flex-1 bg-secondary hover:bg-secondary/80 text-foreground text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
@@ -99,7 +114,7 @@ export default function Account() {
                 <div className="flex gap-2">
                   <Link href="/result?style=colorful">
                     <button className="flex-1 bg-primary/5 hover:bg-primary/10 text-primary text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
-                      <Eye className="w-4 h-4" /> View
+                      <Eye className="w-4 h-4" /> {t("account.view")}
                     </button>
                   </Link>
                   <button className="flex-1 bg-secondary hover:bg-secondary/80 text-foreground text-sm font-medium py-2 rounded-lg transition-colors flex items-center justify-center gap-2">
@@ -115,7 +130,7 @@ export default function Account() {
                 <div className="bg-white p-4 rounded-full shadow-sm mb-4">
                   <span className="text-2xl">+</span>
                 </div>
-                <h3 className="font-bold">Create New Board</h3>
+                <h3 className="font-bold">{t("account.createNew")}</h3>
               </div>
             </Link>
           </div>
@@ -140,11 +155,11 @@ export default function Account() {
               </div>
               <div className="flex items-center gap-4 w-full md:w-auto">
                 <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-bold uppercase tracking-wide">
-                  Processing
+                  {t("account.status.processing")}
                 </span>
                 <Link href="/account/orders/12345">
                   <button className="flex-1 md:flex-none px-4 py-2 border border-border rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
-                    View Details
+                    {t("account.view")}
                   </button>
                 </Link>
               </div>
@@ -169,11 +184,11 @@ export default function Account() {
               </div>
               <div className="flex items-center gap-4 w-full md:w-auto">
                 <span className="px-3 py-1 rounded-full bg-green-100 text-green-700 text-xs font-bold uppercase tracking-wide">
-                  Delivered
+                  {t("account.status.delivered")}
                 </span>
                 <Link href="/account/orders/98765">
                   <button className="flex-1 md:flex-none px-4 py-2 border border-border rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
-                    View Details
+                    {t("account.view")}
                   </button>
                 </Link>
               </div>
