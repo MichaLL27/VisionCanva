@@ -1,0 +1,130 @@
+Update the VisionAI creation flow logic to a TWO-STEP AI PROCESS instead of direct image generation.
+
+Do NOT remove existing screens or UI components.
+Only change the FLOW, DATA HANDLING, and add ONE NEW INTERMEDIATE SCREEN.
+
+CURRENT FLOW:
+Focus Areas → Vision Text → Style → AI Image Generation → Result
+
+NEW REQUIRED FLOW:
+Focus Areas → Vision Text → Style → 
+STEP 1: AI PROMPT GENERATION →
+USER PREVIEW & CONFIRM PROMPT →
+STEP 2: AI IMAGE GENERATION →
+Result Screen
+
+---
+
+STEP 1: AI PROMPT GENERATION (NEW LOGIC)
+
+After the user completes:
+- Focus Areas
+- Vision Text
+- Style
+
+Instead of sending directly to image generation:
+
+1. Send the user inputs to OpenAI TEXT MODEL (ChatGPT).
+2. The model must generate:
+   - A highly detailed IMAGE PROMPT for a vision board
+   - Based on:
+     - The user's life goals
+     - Their written dream description
+     - The selected visual style
+
+The output must be a clean, cinematic, professional image prompt in English (even if the UI is Hebrew).
+
+---
+
+NEW SCREEN: “AI PROMPT PREVIEW”
+
+Add a new screen between loading and image result:
+
+Title (Hebrew default):
+- “ה־AI יצר פרומפט ללוח החזון שלך”
+
+Subtitle:
+- “כך הבינה המלאכותית מתארת את לוח החזון שלך לפני יצירת התמונה”
+
+UI ELEMENTS:
+- Large readonly text area (card style) that displays:
+  - The full generated image prompt
+- Buttons:
+  - Primary: “אישור ויצירת תמונה”
+  - Secondary: “צרו פרומפט חדש”
+
+Behavior:
+- Clicking “אישור ויצירת תמונה” sends the generated PROMPT to the IMAGE GENERATION MODEL.
+- Clicking “צרו פרומפט חדש” re-runs STEP 1 (text→prompt) only.
+
+---
+
+STEP 2: AI IMAGE GENERATION (UPDATED LOGIC)
+
+Once the user approves the prompt:
+
+1. Send the generated PROMPT to the OpenAI IMAGE MODEL.
+2. Generate:
+   - One main vision board image (or multiple variations if configured).
+3. Then continue to:
+   - Existing “Manifesting your vision…” loading screen
+   - Existing Result screen with:
+     - Vision board image
+     - Generate variation (this reuses ONLY the image generation step with the same prompt)
+     - Download PDF
+     - Send to Print
+
+---
+
+DATA STRUCTURE UPDATE (INTERNAL LOGIC ONLY)
+
+Store these separately:
+- userVisionText (raw dream description)
+- aiGeneratedPrompt (final cinematic image prompt)
+- generatedImageURL (final board image)
+
+The image model must NEVER receive the raw user text directly — ONLY the AI-generated prompt.
+
+---
+
+IMPORTANT UI RULES
+
+- The user must NEVER write image prompts manually.
+- The user only writes:
+  - Goals
+  - Dream description
+- The system (ChatGPT) always converts that into a professional image prompt.
+- The user is allowed to:
+  - Approve the prompt
+  - Regenerate the prompt
+  - But NOT edit it manually.
+
+---
+
+VISUAL CONSISTENCY
+
+- The new “Prompt Preview” screen must:
+  - Use the same rounded card UI
+  - Same background
+  - Same typography
+  - Same RTL behavior in Hebrew
+- The progress indicator at the top must now show:
+  Step 1: Details
+  Step 2: Prompt
+  Step 3: Image
+
+---
+
+FINAL RESULT
+
+The VisionAI creation experience must now feel like:
+1. The user describes their dream.
+2. The AI translates it into a perfect visual command.
+3. Then the AI turns that command into a real vision board image.
+
+This makes the process:
+✅ Smarter
+✅ More professional
+✅ Much higher image quality
+✅ Easier to debug & improve
+✅ Better for future prompt optimization
