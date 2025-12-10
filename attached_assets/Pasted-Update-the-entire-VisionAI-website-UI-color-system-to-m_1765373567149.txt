@@ -1,0 +1,127 @@
+Update the entire VisionAI website UI color system to match the visual color palette of the newly uploaded vision board images (luxury sunset, ocean blues, warm gold, sand, nature green, soft shadows).
+
+Do NOT change layout, spacing, typography, components, or behavior.
+Only update the COLOR THEME across the entire app.
+
+Extract the dominant visual palette conceptually from the current example vision boards, and apply it as a new global design system.
+
+TARGET MOOD:
+- Warm luxury
+- Sunset gold
+- Deep ocean blue
+- Soft sand beige
+- Olive / nature green
+- Calm, premium, aspirational
+- Emotional but clean
+
+---
+
+GLOBAL COLOR SYSTEM TO APPLY:
+
+PRIMARY COLOR (replace current purple):
+- Warm sunset gold → used for:
+  - Main CTA buttons
+  - Highlights
+  - Primary icons
+  - Progress indicators
+
+SECONDARY COLOR:
+- Deep ocean blue → used for:
+  - Secondary buttons
+  - Links
+  - Active states
+
+BACKGROUND COLORS:
+- Main background:
+  - Soft sand / warm off-white gradient (ivory + light beige)
+- Card backgrounds:
+  - Pure white with warm soft shadow
+- Section separators:
+  - Very light warm gray
+
+TEXT COLORS:
+- Primary text:
+  - Deep charcoal / warm near-black
+- Secondary text:
+  - Soft warm gray
+- Muted labels:
+  - Light sand gray
+
+SUCCESS STATES:
+- Nature green (inspired by health & outdoor boards)
+
+ERROR STATES:
+- Deep coral red (sunset-style red, not neon)
+
+---
+
+BUTTONS:
+- Primary buttons:
+  - Gold background
+  - White text
+  - Soft warm shadow
+- Secondary buttons:
+  - Ocean blue outline
+  - Ocean blue text
+- Disabled buttons:
+  - Sand gray fill
+  - Muted text
+
+---
+
+CARDS & SHADOWS:
+- All cards:
+  - Keep rounded corners
+  - Replace cool shadows with warm soft shadows
+  - Subtle depth inspired by sunset lighting
+
+---
+
+ICONS:
+- Change all icon strokes/fills from purple to:
+  - Gold for active
+  - Ocean blue for secondary
+  - Warm gray for inactive
+
+---
+
+PROGRESS BARS & STEPS:
+- Active step: gold
+- Completed step: nature green
+- Inactive step: sand gray
+
+---
+
+FOOTER:
+- Background: warm very dark charcoal with slight brown undertone
+- Text: soft sand white
+- Links: gold hover state
+
+---
+
+IMPORTANT RULES:
+- Do NOT keep any purple in the system.
+- Do NOT introduce neon colors.
+- Do NOT change layout or spacing.
+- Only recolor using a warm luxury nature-inspired palette.
+- Keep contrast fully accessible.
+
+FINAL RESULT:
+The VisionAI website should visually feel like it belongs to:
+- Luxury success
+- Travel & freedom
+- Relationships
+- Health & vitality
+- Calm premium life
+
+Exactly like the emotional tone of the current vision board images.
+
+Apply this color system globally across:
+- Landing page
+- Create flow
+- Loading screen
+- Result screen
+- Send to print
+- Account pages
+- Admin dashboard
+- Footer
