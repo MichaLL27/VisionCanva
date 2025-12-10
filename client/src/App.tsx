@@ -9,13 +9,52 @@ import Create from "@/pages/create";
 import Result from "@/pages/result";
 import Success from "@/pages/success";
 
+// New Pages
+import SignIn from "@/pages/auth/sign-in";
+import SignUp from "@/pages/auth/sign-up";
+import Account from "@/pages/account/index";
+import OrderDetails from "@/pages/account/order";
+import PrintOptions from "@/pages/print/options";
+import Shipping from "@/pages/print/shipping";
+import Summary from "@/pages/print/summary";
+import PrintSuccess from "@/pages/print/success";
+import AdminDashboard from "@/pages/admin/dashboard";
+import Terms from "@/pages/legal/terms";
+import Privacy from "@/pages/legal/privacy";
+import Refund from "@/pages/legal/refund";
+import Disclaimer from "@/pages/legal/disclaimer";
+
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home}/>
       <Route path="/create" component={Create}/>
       <Route path="/result" component={Result}/>
-      <Route path="/success" component={Success}/>
+      <Route path="/success" component={Success}/> {/* Keeping old success for backward compatibility or direct link */}
+      
+      {/* Auth */}
+      <Route path="/auth/sign-in" component={SignIn}/>
+      <Route path="/auth/sign-up" component={SignUp}/>
+      
+      {/* Account */}
+      <Route path="/account" component={Account}/>
+      <Route path="/account/orders/:id" component={OrderDetails}/>
+      
+      {/* Print Flow */}
+      <Route path="/print/options" component={PrintOptions}/>
+      <Route path="/print/shipping" component={Shipping}/>
+      <Route path="/print/summary" component={Summary}/>
+      <Route path="/print/success" component={PrintSuccess}/>
+      
+      {/* Admin */}
+      <Route path="/admin/dashboard" component={AdminDashboard}/>
+      
+      {/* Legal */}
+      <Route path="/legal/terms" component={Terms}/>
+      <Route path="/legal/privacy" component={Privacy}/>
+      <Route path="/legal/refund" component={Refund}/>
+      <Route path="/legal/disclaimer" component={Disclaimer}/>
+      
       <Route component={NotFound} />
     </Switch>
   );
