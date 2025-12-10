@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Sparkles, Loader2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, Sparkles, Loader2, RefreshCw } from "lucide-react";
 import { Layout } from "@/components/Layout";
 import { useLocalization } from "@/lib/localization";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/api";
 
 export default function Create() {
   const [_, setLocation] = useLocation();
   const [step, setStep] = useState(1);
-  const [isGenerating, setIsGenerating] = useState(false);
   const { t, language } = useLocalization();
   
   // Icons that need mirroring
@@ -19,6 +20,7 @@ export default function Create() {
   const [selectedAreas, setSelectedAreas] = useState<string[]>([]);
   const [description, setDescription] = useState("");
   const [selectedStyle, setSelectedStyle] = useState("");
+  const [generatedPrompt, setGeneratedPrompt] = useState("");
 
   const LIFE_AREAS = [
     { id: "money", label: t("create.area.money") },
@@ -37,6 +39,39 @@ export default function Create() {
     { id: "spiritual", name: t("create.style.spiritual"), description: t("create.style.spiritualDesc") },
   ];
 
+  // API Mutations
+  const generatePromptMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest<{ prompt: string }>("POST", "/api/generate-prompt", {
+        focusAreas: selectedAreas,
+        visionText: description,
+        style: selectedStyle,
+      });
+      return res.prompt;
+    },
+    onSuccess: (prompt) => {
+      setGeneratedPrompt(prompt);
+      setStep(4); // Move to prompt preview
+    },
+  });
+
+  const generateImageMutation = useMutation({
+    mutationFn: async () => {
+      const res = await apiRequest<{ imageUrl: string }>("POST", "/api/generate-image", {
+        prompt: generatedPrompt,
+      });
+      return res.imageUrl;
+    },
+    onSuccess: (imageUrl) => {
+      // Navigate to result with query params (in a real app, we'd persist state properly)
+      // Pass the image URL via query param for now, or store in context/local storage
+      // For simplicity in this demo, we'll assume the Result page can read it or we pass it via state
+      // Since wouter doesn't support state passing easily, we'll use query param for the image URL (encoded)
+      // In a real production app, we'd save the board ID and navigate to /result/:id
+      setLocation(`/result?style=${selectedStyle}&imageUrl=${encodeURIComponent(imageUrl)}`);
+    },
+  });
+
   const toggleArea = (area: string) => {
     if (selectedAreas.includes(area)) {
       setSelectedAreas(selectedAreas.filter(a => a !== area));
@@ -47,7 +82,11 @@ export default function Create() {
 
   const handleNext = () => {
     if (step === 3) {
-      handleGenerate();
+      // Instead of generating image directly, generate prompt first
+      generatePromptMutation.mutate();
+    } else if (step === 4) {
+      // Approve prompt and generate image
+      generateImageMutation.mutate();
     } else {
       setStep(step + 1);
     }
@@ -57,14 +96,7 @@ export default function Create() {
     if (step > 1) setStep(step - 1);
   };
 
-  const handleGenerate = () => {
-    setIsGenerating(true);
-    // Simulate generation delay
-    setTimeout(() => {
-      // Navigate to result with query params (in a real app, we'd persist state properly)
-      setLocation(`/result?style=${selectedStyle}`);
-    }, 3000);
-  };
+  const isGenerating = generatePromptMutation.isPending || generateImageMutation.isPending;
 
   if (isGenerating) {
     return (
@@ -117,12 +149,10 @@ export default function Create() {
           </button>
           
           <div className="flex gap-2">
-            {[1, 2, 3].map((s) => (
-              <div 
-                key={s} 
-                className={`h-2 w-8 rounded-full transition-colors ${s <= step ? 'bg-primary' : 'bg-secondary'}`} 
-              />
-            ))}
+            {/* Steps: 1 (Details), 2 (Prompt), 3 (Image/Done) - mapping 1,2,3 to Details and 4 to Prompt */}
+            <div className={`h-2 w-8 rounded-full transition-colors ${step >= 1 ? 'bg-primary' : 'bg-secondary'}`} title={t("create.step.details")} />
+            <div className={`h-2 w-8 rounded-full transition-colors ${step >= 4 ? 'bg-primary' : 'bg-secondary'}`} title={t("create.step.prompt")} />
+            <div className={`h-2 w-8 rounded-full transition-colors ${step === 5 ? 'bg-primary' : 'bg-secondary'}`} title={t("create.step.image")} />
           </div>
           
           <div className="w-9" /> {/* Spacer */}
@@ -232,6 +262,37 @@ export default function Create() {
                 </div>
               </motion.div>
             )}
+
+            {step === 4 && (
+              <motion.div
+                key="step4"
+                initial={{ opacity: 0, x: language === "he" ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: language === "he" ? 20 : -20 }}
+                className="flex-1 flex flex-col"
+              >
+                <h1 className="text-3xl md:text-4xl font-display font-bold mb-4">{t("create.prompt.title")}</h1>
+                <p className="text-muted-foreground text-lg mb-8">{t("create.prompt.subtitle")}</p>
+                
+                <div className="relative flex-1 min-h-[200px] mb-8">
+                  <div className="w-full h-full p-8 rounded-2xl border-2 border-transparent bg-white shadow-warm overflow-auto">
+                    <p className="text-lg leading-relaxed text-foreground font-medium whitespace-pre-wrap" dir="ltr">
+                      {generatedPrompt}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                   <button
+                    onClick={() => generatePromptMutation.mutate()}
+                    className="w-full py-4 rounded-full font-medium text-lg flex items-center justify-center gap-2 transition-all border-2 border-secondary text-secondary hover:bg-secondary/5"
+                  >
+                    <RefreshCw className="w-5 h-5" />
+                    {t("create.prompt.regenerate")}
+                  </button>
+                </div>
+              </motion.div>
+            )}
           </AnimatePresence>
 
           {/* Footer Actions */}
@@ -250,8 +311,9 @@ export default function Create() {
                   : 'bg-primary text-white hover:bg-primary/90 hover:shadow-xl hover:-translate-y-0.5'}
               `}
             >
-              {step === 3 ? t("create.button") : t("common.continue")}
-              {step !== 3 && <NextIcon className="w-5 h-5" />}
+              {step === 4 ? t("create.prompt.approve") : t("common.continue")}
+              {(step !== 4) && <NextIcon className="w-5 h-5" />}
+              {step === 4 && <Sparkles className="w-5 h-5" />}
             </button>
           </div>
         </main>
