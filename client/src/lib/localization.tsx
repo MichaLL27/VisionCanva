@@ -46,39 +46,29 @@ const translations: Translations = {
   "auth.and": { he: "ו", en: "and" },
 
   // Create Flow
-  "create.focusAreas": { he: "תחומי מיקוד", en: "Focus Areas" },
-  "create.focusSubtitle": { he: "אילו תחומים בחיים תרצו לשדרג השנה?", en: "Which areas of your life do you want to elevate this year?" },
-  "create.area.money": { he: "כסף ושפע", en: "Money & Wealth" },
-  "create.area.career": { he: "קריירה ועסקים", en: "Career & Business" },
-  "create.area.love": { he: "אהבה וזוגיות", en: "Love & Relationships" },
-  "create.area.health": { he: "בריאות וכושר", en: "Health & Fitness" },
-  "create.area.family": { he: "משפחה ובית", en: "Family & Home" },
-  "create.area.spirituality": { he: "רוחניות", en: "Spirituality" },
-  "create.area.social": { he: "חיי חברה וכיף", en: "Social Life & Fun" },
-  "create.area.travel": { he: "טיולים והרפתקאות", en: "Travel & Adventure" },
+  "create.dreamsTitle": { he: "תארו את החזון שלכם", en: "Describe Your Dream Life" },
+  "create.dreamsSubtitle": { he: "כתבו את מה שאתם רוצים, את המטרות שלכם, וכיצד אתם רוצים שהחיים שלכם ירגישו. הבינה המלאכותית תהפוך זאת ללוח חזון חזק.", en: "Write what you desire, your goals, and how you want your life to feel. The AI will turn this into a powerful vision board." },
+  "create.dreamsPlaceholder": { he: "כתבו את החלומות שלכם כאן...", en: "Write your dreams here..." },
+  "create.dreamsHelper": { he: "אתם יכולים לכתוב בכל שפה. הבינה המלאכותית תהמיר זאת לפרומפט בעברית ואנגלית.", en: "You can write in any language. The AI will convert it to an English image prompt." },
+  "create.generatePrompt": { he: "צרו פרומפט", en: "Generate Prompt" },
+  "create.errorTooShort": { he: "נא להזין תיאור ארוך יותר של החזון שלכם", en: "Please write a longer description of your dreams" },
 
-  "create.vision": { he: "החזון שלך", en: "Your Vision" },
-  "create.visionSubtitle": { he: "תארו איך נראים ונשמעים חיי החלומות שלכם בעוד שנה מהיום. היו ספציפיים.", en: "Describe how your dream life looks and feels one year from now. Be specific." },
-  "create.visionPlaceholder": { he: "אני מתעורר/ת בחדר שינה שטוף שמש המשקיף לים. אני מרגיש/ה רגוע/ה, בריא/ה וחופשי/ה כלכלית. אני מנהל/ת עסק יצירתי מצליח...", en: "I am waking up in a sun-filled bedroom overlooking the ocean. I feel calm, healthy, and financially free. I run a successful creative business..." },
-
-  "create.style": { he: "בחרו סגנון", en: "Choose a Style" },
-  "create.styleSubtitle": { he: "איזו תחושה תהיה ללוח החזון שלכם?", en: "How should your vision board feel?" },
-  "create.style.modern": { he: "מודרני ונקי", en: "Modern & Clean" },
-  "create.style.modernDesc": { he: "מינימליסטי, מאורגן ורענן.", en: "Minimalist, organized, and fresh." },
-  "create.style.colorful": { he: "צבעוני ואנרגטי", en: "Colorful & Energetic" },
-  "create.style.colorfulDesc": { he: "נועז, תוסס ומלא אנרגיה.", en: "Bold, vibrant, and high energy." },
-  "create.style.spiritual": { he: "רגוע ורוחני", en: "Calm & Spiritual" },
-  "create.style.spiritualDesc": { he: "רך, אורגני ושלו.", en: "Soft, organic, and peaceful." },
-  "create.button": { he: "צור את לוח החזון שלי", en: "Create My Vision Board" },
+  "create.promptTitle": { he: "פרומפט AI ללוח החזון שלך", en: "AI Prompt for Your Vision Board" },
+  "create.promptSubtitle": { he: "זה הפרומפט שהבינה המלאכותית תשתמש בו ליצירת לוח החזון שלך.", en: "This is the prompt the AI will use to create your vision board image." },
+  "create.generateBoard": { he: "צרו לוח חזון", en: "Generate Vision Board" },
+  "create.newPrompt": { he: "צרו פרומפט חדש", en: "Generate New Prompt" },
 
   "loading.manifesting": { he: "יוצרים את לוח החזון שלכם…", en: "Manifesting your vision…" },
-  "loading.curating": { he: "הבינה המלאכותית בונה עבורכם את לוח החזון המושלם…", en: "Our AI is curating the perfect images to align with your goals..." },
+  "loading.creatingBoard": { he: "יוצרים את לוח החזון שלכם…", en: "Creating your vision board…" },
+  "loading.creatingPrompt": { he: "יוצרים פרומפט עבור לוח החזון שלכם…", en: "Creating AI prompt for your vision board…" },
+  "loading.curating": { he: "הבינה המלאכותית בונה עבורכם את לוח החזון המושלם…", en: "Our AI is creating the perfect vision board for you..." },
+  "loading.thinkingPrompt": { he: "הבינה המלאכותית חושבת על הפרומפט הטוב ביותר…", en: "AI is thinking about the perfect prompt..." },
 
   // Result Screen
   "result.yourVision": { he: "לוח החזון שלך", en: "Your Vision" },
   "result.nextSteps": { he: "השלבים הבאים", en: "Next Steps" },
   "result.sendToPrint": { he: "שלחו להדפסה", en: "Send to Print" },
-  "result.generateVariation": { he: "צרו גרסה נוספת", en: "Generate Variation" },
+  "result.generateVariation": { he: "צרו לוח חדש", en: "Create Another" },
   "result.downloadPdf": { he: "הורדה כ-PDF", en: "Download as PDF" },
   "result.printIncludes": { he: "ההדפסה כוללת:", en: "Print Includes:" },
   "result.include.paper": { he: "נייר פוטו מט איכותי", en: "High-quality matte photo paper" },
@@ -94,7 +84,7 @@ const translations: Translations = {
   "print.summary.subtitle": { he: "בדקו את ההזמנה לפני התשלום.", en: "Review your order before payment." },
   "print.payButton": { he: "לתשלום ושליחה להדפסה", en: "Pay and send to print" },
   "print.success.title": { he: "ההזמנה נשלחה בהצלחה ✨", en: "Your print order is on its way ✨" },
-  "print.success.text": { he: "קיבלנו את ההזמנה ושלחנו אותה לסטודיו ההדפסות שלנו. תקבלו מייל עם פרטי מעקב בקרוב.", en: "We’ve received your order and sent it to our print studio. You’ll receive an email with tracking details soon." },
+  "print.success.text": { he: "קיבלנו את ההזמנה ושלחנו אותה לסטודיו ההדפסות שלנו. תקבלו מייל עם פרטי מעקב בקרוב.", en: "We've received your order and sent it to our print studio. You'll receive an email with tracking details soon." },
   "print.success.viewOrders": { he: "ההזמנות שלי", en: "View my orders" },
   "print.success.createAnother": { he: "יצירת לוח נוסף", en: "Create another" },
 
@@ -139,7 +129,6 @@ export function LocalizationProvider({ children }: { children: React.ReactNode }
   const [language, setLanguageState] = useState<Language>("he");
 
   useEffect(() => {
-    // Check local storage on mount
     const savedLang = localStorage.getItem("visionai-lang") as Language;
     if (savedLang) {
       setLanguageState(savedLang);
@@ -147,7 +136,6 @@ export function LocalizationProvider({ children }: { children: React.ReactNode }
   }, []);
 
   useEffect(() => {
-    // Update document direction and lang attribute
     document.documentElement.dir = language === "he" ? "rtl" : "ltr";
     document.documentElement.lang = language;
     localStorage.setItem("visionai-lang", language);

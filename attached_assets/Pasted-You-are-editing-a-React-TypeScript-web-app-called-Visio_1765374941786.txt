@@ -1,0 +1,161 @@
+You are editing a React + TypeScript web app called VisionAI.
+
+Goal: Completely replace the existing “create vision board” flow with a new, ultra-simple 2-step process:
+
+NEW FLOW (AND NOTHING ELSE):
+
+1) User types their dreams/goals in natural language.
+2) Backend calls OpenAI TEXT model to turn that into a single long, clear image prompt.
+3) User sees the generated prompt on screen.
+4) User clicks a button to send that prompt to the OpenAI IMAGE model.
+5) Backend returns a final vision board image URL.
+6) UI shows the final image with options to regenerate or download.
+
+Delete all the old logic and UI related to:
+- Focus areas selection
+- Style selection (Modern/Clean, Colorful, etc.)
+- Multi-step progress bars related to focus/style
+- Any “create” steps that are not: (a) dreams input, (b) prompt review, (c) final image.
+- Any code that generates an image directly from the user’s raw text without going through the prompt step.
+
+Keep:
+- Overall app shell, header, footer, routing.
+- The existing “result” / image display page layout if it’s easy to reuse (just change how it gets its data).
+
+--------------------------------
+FRONTEND REQUIREMENTS
+--------------------------------
+
+Route: /create
+
+Replace everything on this route with a new flow:
+
+### STEP 1 – DREAM INPUT SCREEN
+
+Component example name: DreamInputScreen.
+
+Layout:
+- Title: "Describe your dream life"
+- Subtitle: "Write what you desire, your goals, and how you want your life to feel. The AI will turn this into a powerful vision board."
+- One large multiline textarea:
+  - Placeholder: "Write your dreams here..."
+- Primary button: "Generate Prompt"
+- Optionally: helper text below the textarea: "You can write in any language. The AI will convert it into an English image prompt."
+
+On clicking “Generate Prompt”:
+- Validate: if text is too short (< 10–20 chars), show a simple error toast.
+- Call a backend endpoint (create it if needed): POST /api/generatePrompt
+  - Body: { dreamsText: string }
+- While waiting, show a simple loading state (e.g. “Creating your AI prompt…”).
+- When the response returns, navigate to Step 2 and pass the prompt.
+
+### STEP 2 – PROMPT REVIEW & IMAGE GENERATION
+
+Component example name: PromptReviewScreen.
+
+Props/state: receives the generated prompt string.
+
+Layout:
+- Title: "AI Prompt for Your Vision Board"
+- Subtitle: "This is the prompt the AI will use to create your vision board image."
+- A large, READ-ONLY textarea or card showing the prompt text.
+- Buttons:
+  - Primary: "Generate Vision Board"
+  - Secondary: "Generate New Prompt" (this re-calls /api/generatePrompt using the original dreams text)
+
+Behavior:
+- “Generate Vision Board”:
+  - Calls a backend endpoint: POST /api/generateVisionBoard
+    - Body: { prompt: string }
+  - Shows a loading screen: “Creating your vision board…”
+  - On success, navigate to or render the Result screen with the image.
+
+- “Generate New Prompt”:
+  - Calls /api/generatePrompt again, using the same dreamsText stored in state.
+  - Updates the prompt on screen when received.
+
+### RESULT SCREEN – FINAL IMAGE
+
+You can reuse the existing result/vision board screen, but simplify it:
+
+- Show the generated image in a large card.
+- Under the image, show the prompt used (optional, read-only).
+- Buttons:
+  - "Generate Another Vision Board" (re-call /api/generateVisionBoard with the same prompt, or show a back link to PromptReviewScreen)
+  - "Download as Image / PDF" (use the existing download logic if present, or stub it for now)
+  - "Start Over" (navigate back to DreamInputScreen and clear state)
+
+--------------------------------
+BACKEND REQUIREMENTS
+--------------------------------
+
+Assume there is already some OpenAI client in the project; if not, create a simple one.
+
+Create TWO separate backend endpoints / server functions:
+
+1) POST /api/generatePrompt
+
+Input JSON:
+{
+  "dreamsText": string
+}
+
+Logic:
+- Call OpenAI TEXT model (ChatGPT).
+- System prompt (pseudocode, but implement as a string):
+
+  "You receive a user's written dreams, goals, and desired future life.
+   Your job is to convert this into ONE long, detailed, clear image-generation prompt in English.
+   The prompt should describe a cinematic, high-resolution vision board,
+   including relevant scenes, symbols, environments, moods, colors, and composition
+   that visually represent the user’s dreams and goals.
+   Do NOT talk about 'the user' or 'this text'. Just directly describe the image."
+
+- Include the user dreamsText as user content.
+- Return JSON:
+
+{
+  "prompt": "..." // the long image prompt in English
+}
+
+2) POST /api/generateVisionBoard
+
+Input JSON:
+{
+  "prompt": string
+}
+
+Logic:
+- Call OpenAI IMAGE model using ONLY this prompt.
+- Return JSON:
+
+{
+  "imageUrl": "https://..." // the URL or base64 data, depending on how images are handled in this app
+}
+
+--------------------------------
+STATE MANAGEMENT
+
+On the frontend, store:
+- dreamsText (from Step 1)
+- currentPrompt (from /api/generatePrompt)
+- lastImageUrl (from /api/generateVisionBoard)
+
+The flow is:
+- dreamsText → /api/generatePrompt → prompt → /api/generateVisionBoard → imageUrl
+
+--------------------------------
+CLEANUP
+
+- Remove all unused components, hooks, and code related to:
+  - focusAreas
+  - styles/themes of boards
+  - multi-step wizard that doesn’t fit this new 2-step flow.
+- Make sure the /create route now starts directly at DreamInputScreen.
+- Make sure TypeScript types are updated and there are no unused imports or broken props.
+
+The final UX should feel:
+- Extremely simple
+- One main input (your dreams)
+- AI creates a long clean prompt
+- Then AI turns that prompt into a single vision board image.
