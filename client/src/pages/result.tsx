@@ -1,29 +1,19 @@
-import { useState, useEffect } from "react";
-import { Link, useLocation } from "wouter";
+import { useState } from "react";
+import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { Printer, RefreshCw, Download, Check, MapPin, CreditCard } from "lucide-react";
-import modernImage from "@assets/generated_images/modern_clean_vision_board_collage.png";
-import colorfulImage from "@assets/generated_images/colorful_energetic_vision_board_collage.png";
-import spiritualImage from "@assets/generated_images/calm_spiritual_vision_board_collage.png";
+import { Printer, RefreshCw, Download, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Layout } from "@/components/Layout";
 import { useLocalization } from "@/lib/localization";
 
 export default function Result() {
-  const [location, setLocation] = useLocation();
   const { toast } = useToast();
-  const searchParams = new URLSearchParams(window.location.search);
-  const style = searchParams.get("style") || "modern";
   const { t } = useLocalization();
   
-  // Determine image based on style
-  const getImage = () => {
-    switch(style) {
-      case "colorful": return colorfulImage;
-      case "spiritual": return spiritualImage;
-      default: return modernImage;
-    }
-  };
+  // Get image URL and vision summary from query params
+  const searchParams = new URLSearchParams(window.location.search);
+  const imageUrl = decodeURIComponent(searchParams.get("imageUrl") || "");
+  const visionSummary = decodeURIComponent(searchParams.get("visionSummary") || "");
 
   const handleDownload = () => {
     toast({
@@ -43,17 +33,19 @@ export default function Result() {
               animate={{ opacity: 1, y: 0 }}
               className="bg-white p-4 rounded-3xl shadow-2xl"
             >
-              <img 
-                src={getImage()} 
-                alt="Generated Vision Board" 
-                className="w-full h-auto rounded-2xl"
-              />
+              {imageUrl && (
+                <img 
+                  src={imageUrl} 
+                  alt="לוח החזון שלך" 
+                  className="w-full h-auto rounded-2xl"
+                />
+              )}
             </motion.div>
 
             <div className="bg-white p-8 rounded-3xl shadow-sm border border-border/50">
               <h3 className="font-display font-bold text-xl mb-4 text-primary">{t("result.yourVision")}</h3>
               <p className="text-muted-foreground leading-relaxed">
-                "A future where financial freedom allows for spontaneous travel and deep creative work. Surrounded by nature, practicing daily mindfulness, and cultivating meaningful connections with loved ones. Radiant health and abundant energy flow through every day."
+                {visionSummary || "לוח החזון שלך נוצר בהצלחה."}
               </p>
             </div>
           </div>
@@ -73,13 +65,14 @@ export default function Result() {
                   </button>
                 </Link>
                 
-                <button 
-                  onClick={() => window.history.back()}
-                  className="w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 cursor-pointer"
-                >
-                  <RefreshCw className="w-5 h-5" />
-                  {t("result.generateVariation")}
-                </button>
+                <Link href="/create">
+                  <button 
+                    className="w-full bg-secondary hover:bg-secondary/80 text-foreground font-semibold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-3 cursor-pointer"
+                  >
+                    <RefreshCw className="w-5 h-5" />
+                    {t("result.generateVariation")}
+                  </button>
+                </Link>
                 
                 <button 
                   onClick={handleDownload}
@@ -94,15 +87,15 @@ export default function Result() {
                 <h4 className="font-medium text-sm text-muted-foreground mb-4">{t("result.printIncludes")}</h4>
                 <ul className="space-y-3 text-sm">
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-500" />
+                    <Check className="w-4 h-4 text-accent" />
                     {t("result.include.paper")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-500" />
+                    <Check className="w-4 h-4 text-accent" />
                     {t("result.include.shipping")}
                   </li>
                   <li className="flex items-center gap-2">
-                    <Check className="w-4 h-4 text-green-500" />
+                    <Check className="w-4 h-4 text-accent" />
                     {t("result.include.packaging")}
                   </li>
                 </ul>

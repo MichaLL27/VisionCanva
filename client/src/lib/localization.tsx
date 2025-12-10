@@ -71,15 +71,6 @@ const translations: Translations = {
   "create.style.spiritualDesc": { he: "רך, אורגני ושלו.", en: "Soft, organic, and peaceful." },
   "create.button": { he: "צור את לוח החזון שלי", en: "Create My Vision Board" },
 
-  // Prompt Generation Step
-  "create.prompt.title": { he: "ה־AI יצר פרומפט ללוח החזון שלך", en: "AI generated a prompt for your vision board" },
-  "create.prompt.subtitle": { he: "כך הבינה המלאכותית מתארת את לוח החזון שלך לפני יצירת התמונה", en: "This is how the AI describes your vision board before generating the image" },
-  "create.prompt.approve": { he: "אישור ויצירת תמונה", en: "Approve and Generate Image" },
-  "create.prompt.regenerate": { he: "צרו פרומפט חדש", en: "Generate New Prompt" },
-  "create.step.details": { he: "פרטים", en: "Details" },
-  "create.step.prompt": { he: "פרומפט", en: "Prompt" },
-  "create.step.image": { he: "תמונה", en: "Image" },
-
   "loading.manifesting": { he: "יוצרים את לוח החזון שלכם…", en: "Manifesting your vision…" },
   "loading.curating": { he: "הבינה המלאכותית בונה עבורכם את לוח החזון המושלם…", en: "Our AI is curating the perfect images to align with your goals..." },
 
