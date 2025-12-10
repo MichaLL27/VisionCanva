@@ -1,0 +1,123 @@
+Apply full bilingual localization to the existing “VisionAI” web app with the following strict rules:
+
+PRIMARY LANGUAGE:
+- Hebrew is the DEFAULT language on first load for all users.
+- The entire UI must be displayed in Hebrew by default.
+- All Hebrew screens must use full RTL layout (right-to-left):
+  - Text aligned to the right
+  - Icons that indicate direction (arrows, back buttons, progress steps) must be mirrored
+  - Navigation flow must feel natural for Hebrew users
+  - Forms must align labels and inputs from right to left
+
+SECONDARY LANGUAGE:
+- English is the second optional language.
+- Users must be able to switch languages:
+  - From Hebrew to English
+  - From English to Hebrew
+- The language switch must be available globally:
+  - In the header as a small toggle button “EN / עברית”
+  - Also accessible inside “My Account / החשבון שלי”
+- The selected language must persist across all screens and refreshes (saved state).
+
+DO NOT ADD any “Choose your language” screen at the beginning.
+The app must ALWAYS start in Hebrew by default.
+
+---
+
+IMPLEMENT THESE TRANSLATIONS ACROSS ALL EXISTING AND NEW SCREENS:
+
+LANDING PAGE:
+- Title:
+  English: “Create your personal vision board with AI.”
+  Hebrew: “צרו לוח חזון אישי בעזרת בינה מלאכותית”
+- Subtitle:
+  Hebrew: “הפסיקו לגזור ממגזינים. ענו על כמה שאלות על החלומות שלכם וקבלו לוח חזון מוכן להדפסה תוך שניות.”
+- CTA Button:
+  Hebrew default: “התחילו עכשיו”
+
+AUTH:
+- Sign In → “התחברות”
+- Sign Up → “הרשמה”
+- Email → “אימייל”
+- Password → “סיסמה”
+- Full Name → “שם מלא”
+- Forgot password → “שכחתם סיסמה?”
+
+CREATE FLOW SCREENS:
+- Focus Areas → “תחומי מיקוד”
+- Money & Wealth → “כסף ושפע”
+- Career & Business → “קריירה ועסקים”
+- Love & Relationships → “אהבה וזוגיות”
+- Health & Fitness → “בריאות וכושר”
+- Family & Home → “משפחה ובית”
+- Spirituality → “רוחניות”
+
+- Your Vision → “החזון שלך”
+- Placeholder text in Hebrew:
+  “תארו איך נראים ונשמעים חיי החלומות שלכם בעוד שנה מהיום. היו ספציפיים.”
+
+- Choose a Style → “בחרו סגנון”
+  - Modern & Clean → “מודרני ונקי”
+  - Colorful & Energetic → “צבעוני ואנרגטי”
+  - Calm & Spiritual → “רגוע ורוחני”
+
+AI LOADING:
+- “Manifesting your vision…” → “יוצרים את לוח החזון שלכם…”
+- “Our AI is curating the perfect images…” → “הבינה המלאכותית בונה עבורכם את לוח החזון המושלם…”
+
+RESULT SCREEN:
+- Your Vision → “לוח החזון שלך”
+- Next Steps → “השלבים הבאים”
+- Send to Print → “שלחו להדפסה”
+- Generate Variation → “צרו גרסה נוספת”
+- Download as PDF → “הורדה כ-PDF”
+
+SEND TO PRINT FLOW:
+- Choose your print size → “בחרו גודל הדפסה”
+- Shipping details → “פרטי משלוח”
+- Order summary → “סיכום הזמנה”
+- Pay and send to print → “לתשלום ושליחה להדפסה”
+- Print success → “ההזמנה נשלחה בהצלחה”
+
+USER ACCOUNT:
+- My Account → “החשבון שלי”
+- My Vision Boards → “לוחות החזון שלי”
+- My Orders → “ההזמנות שלי”
+- Log out → “התנתקות”
+
+FOOTER:
+- How it works → “איך זה עובד”
+- Pricing → “מחירים”
+- FAQ → “שאלות נפוצות”
+- About → “אודות”
+- Contact → “צור קשר”
+- Support → “תמיכה”
+- Terms of Use → “תנאי שימוש”
+- Privacy Policy → “מדיניות פרטיות”
+- Refund Policy → “מדיניות החזרים”
+- AI Disclaimer → “הצהרת שימוש בבינה מלאכותית”
+
+---
+
+TECHNICAL UI RULES:
+
+- Every Hebrew screen must be fully RTL.
+- Every English screen must be fully LTR.
+- The same components must automatically flip direction when the language is switched.
+- All numbers, prices, and measurements must remain readable in both languages.
+- Keep all icons, spacing, and cards visually consistent after RTL conversion.
+- Do NOT duplicate separate Hebrew-only or English-only layouts—use one adaptive bilingual UI.
+
+---
+
+DESIGN CONSTRAINT:
+- Do NOT change the existing color palette, layout structure, or visual identity.
+- Only apply language, alignment, and direction changes.
+- Keep the current spacing, rounded cards, soft shadows, and premium calm look.
+
+FINAL RESULT:
+The entire VisionAI product must work perfectly in:
+✅ Hebrew (default, RTL)
+✅ English (secondary, LTR)
+✅ With instant manual switching between languages
+✅ With language persistence across the whole app
