@@ -2,9 +2,6 @@ import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react"; // Import both arrows
 import { Layout } from "@/components/Layout";
-import modernImage from "@assets/generated_images/modern_clean_vision_board_collage.png";
-import colorfulImage from "@assets/generated_images/colorful_energetic_vision_board_collage.png";
-import spiritualImage from "@assets/generated_images/calm_spiritual_vision_board_collage.png";
 import { useLocalization } from "@/lib/localization";
 
 export default function Home() {
@@ -76,13 +73,13 @@ export default function Home() {
                 className="space-y-4 pt-12"
               >
                 <img 
-                  src={modernImage} 
-                  alt="Modern Vision Board" 
+                  src="/images/vision-board-1.jpg" 
+                  alt="לוח חזון לדוגמה – חופשות וים" 
                   className="w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl rotate-[-2deg] hover:rotate-0 transition-transform duration-500"
                 />
                 <img 
-                  src={spiritualImage} 
-                  alt="Spiritual Vision Board" 
+                  src="/images/vision-board-3.jpg" 
+                  alt="לוח חזון לדוגמה – בריאות ואורח חיים" 
                   className="w-full aspect-square object-cover rounded-2xl shadow-2xl rotate-[1deg] hover:rotate-0 transition-transform duration-500"
                 />
               </motion.div>
@@ -91,13 +88,13 @@ export default function Home() {
                 className="space-y-4"
               >
                 <img 
-                  src={colorfulImage} 
-                  alt="Colorful Vision Board" 
+                  src="/images/vision-board-2.jpg" 
+                  alt="לוח חזון לדוגמה – עבודה וחלל ביתי" 
                   className="w-full aspect-square object-cover rounded-2xl shadow-2xl rotate-[2deg] hover:rotate-0 transition-transform duration-500"
                 />
                 <img 
-                  src={modernImage} 
-                  alt="Clean Vision Board" 
+                  src="/images/vision-board-4.jpg" 
+                  alt="לוח חזון לדוגמה – אהבה וקשרים" 
                   className="w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-500"
                 />
               </motion.div>
