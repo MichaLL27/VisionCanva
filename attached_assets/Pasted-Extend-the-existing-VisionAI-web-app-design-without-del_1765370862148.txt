@@ -1,0 +1,184 @@
+Extend the existing “VisionAI” web app design without deleting or radically changing any current screens.
+
+Keep:
+- The current landing page with hero, CTA “Start Now”
+- The “Focus Areas” screen
+- The “Your Vision” text screen
+- The “Choose a Style” screen
+- The AI loading / “Manifesting your vision…” screen
+- The result screen with the generated vision board, “Generate Variation”, “Send to Print”, and “Download as PDF”
+- The existing color palette (purple primary), typography, rounded cards, and mobile-first layout
+
+Now ADD the following new screens and components, matching the current visual style:
+
+1) GLOBAL HEADER & FOOTER
+- Keep the existing top bar as the main header but add:
+  - Left: “VisionAI” logo / wordmark
+  - Right: links: “How it works”, “Pricing”, “My Account”, and a “Sign In” button when logged out.
+- Add a global footer component that appears on all pages, with a light background and small text:
+  - Columns:
+    - Product: “How it works”, “Pricing”, “FAQ”
+    - Company: “About”, “Contact”, “Support”
+    - Legal: “Terms of Use”, “Privacy Policy”, “Refund Policy”, “AI Disclaimer”
+    - Social: icons for Instagram, TikTok, Pinterest
+  - Bottom line: “© VisionAI – See your future on the wall.”
+- Make sure the footer is simple, clean, and optimized for mobile (stacked layout).
+
+2) “SEND TO PRINT” FLOW (after the existing result screen)
+Reuse the existing “Next Steps” card on the result screen, but when the user clicks “Send to Print”, open a new flow with multiple steps:
+
+SCREEN: Print Options
+- Title: “Choose your print size”
+- Subtitle: “Select how big you want your vision board on the wall.”
+- Show size options as large selectable cards with radio buttons:
+  - A4 (21 x 29.7 cm) – “Small & simple”
+  - A3 (29.7 x 42 cm) – “Most popular”
+  - A2 (42 x 59.4 cm) – “Big poster”
+  - A1 (59.4 x 84.1 cm) – “Statement wall”
+  - Canvas 40 x 60 cm – “Framed-style canvas”
+  - Canvas 60 x 90 cm – “Large premium canvas”
+- Each card includes:
+  - Size name
+  - Dimensions in cm
+  - Example label “From $XX”
+  - One option can have a “Recommended” badge
+- At the bottom: primary button “Continue to details”, secondary button “Back to my vision board”.
+
+SCREEN: Shipping Details
+- Title: “Shipping details”
+- Subtitle: “We’ll send your printed vision board straight to your door.”
+- Form fields:
+  - Full Name (text)
+  - Email (text)
+  - Phone Number (text)
+  - Country (dropdown, default Israel)
+  - City (text)
+  - Street & House Number (text)
+  - Apartment / Floor (optional text)
+  - Zip Code (text)
+  - Notes for delivery (multiline optional)
+- Checkbox: “Use these details for future orders”
+- Primary button: “Continue to summary”
+
+SCREEN: Order Summary & Payment
+- Title: “Order summary”
+- Card with:
+  - Thumbnail of the selected vision board
+  - Selected size
+  - Print price
+  - Shipping price
+  - Total price
+- Section “Print includes”:
+  - High-quality matte photo paper or canvas
+  - Secure packaging
+  - Fast processing time
+- Checkbox: “I agree to the Terms of Use and Refund Policy”
+- Placeholder payment area:
+  - A clean, minimal “Payment” card with:
+    - Text: “Secure payment will be processed here (Stripe / local provider).”
+    - A large button: “Pay and send to print”
+- After pressing “Pay and send to print” the user should see a success state.
+
+SCREEN: Print Success
+- Title: “Your print order is on its way ✨”
+- Text: “We’ve received your order and sent it to our print studio. You’ll receive an email with tracking details soon.”
+- Buttons:
+  - “View my orders”
+  - “Create another vision board”
+
+3) USER ACCOUNT AREA
+Add a “My Account” section accessible from the header.
+
+SCREEN: My Account Overview
+- Show user info (name, email) at the top.
+- Tabs or segmented buttons:
+  - “My Vision Boards”
+  - “My Orders”
+- My Vision Boards:
+  - Grid or list of previous generated vision boards with small thumbnails.
+  - Each item: image, creation date, buttons: “View”, “Download PDF”, “Order print”.
+- My Orders:
+  - List of past and current print orders:
+    - Order ID
+    - Date
+    - Size
+    - Status: “Processing”, “Printing”, “Shipped”
+    - Button: “View details”
+- Include a link “Log out” at the bottom of the account screen.
+
+4) ORDER DETAILS SCREEN
+- Title: “Order #12345”
+- Show:
+  - Vision board preview
+  - Size & material
+  - Shipping address
+  - Order date
+  - Current status with a status badge
+- Timeline style display:
+  - “Order received”
+  - “Sent to print”
+  - “Shipped”
+- Button: “Download vision board PDF”
+
+5) BASIC AUTH PAGES (if not already present)
+Add simple Sign In and Sign Up pages consistent with the current style:
+
+SIGN IN:
+- Title: “Welcome back”
+- Fields: Email, Password
+- Primary button: “Sign In”
+- Link: “Forgot password?”
+- Small text link: “Don’t have an account? Create one”
+
+SIGN UP:
+- Title: “Create your VisionAI account”
+- Fields: Full Name, Email, Password
+- Checkbox: “I agree to the Terms of Use and Privacy Policy”
+- Primary button: “Create account”
+- Small link: “Already have an account? Sign in”
+
+6) SYSTEM MESSAGES / STATES
+Design reusable components for:
+- Loading state: simple spinner or progress bar in purple, with short text like “Saving your details…” or “Processing payment…”
+- Error state: red bordered card with an error icon and a message like:
+  - “Something went wrong. Please try again.”
+  - Include a “Try again” button.
+- Empty state:
+  - For “My Vision Boards” when nothing exists: illustration + text “No boards yet – create your first vision board.”
+  - For “My Orders”: “You haven’t ordered any prints yet.”
+- Success toast or banner:
+  - Small green banner at the top: “Saved successfully”, “Order placed”, etc.
+
+7) BASIC PRINT SHOP / ADMIN DASHBOARD (very simple UI)
+Create a simple admin-style screen (it can be a separate route like /admin) for the print shop:
+
+- Title: “Print Studio Dashboard”
+- Table of orders:
+  - Columns: Order ID, Customer Name, Date, Size, Status, Actions
+- Each row has:
+  - A “View” button to open the Order Details screen
+  - A dropdown or pill buttons to update status: “New”, “In Printing”, “Shipped”
+- Card on the side or top with quick stats:
+  - “New orders today”
+  - “Orders in printing”
+  - “Shipped this week”
+
+Design this admin screen in the same visual language but it can look slightly more utilitarian.
+
+8) LEGAL PAGES (BASIC LAYOUTS)
+Create basic layouts for:
+- Terms of Use
+- Privacy Policy
+- Refund Policy
+- AI Disclaimer
+
+Each:
+- Simple page with a large title at top
+- Long scrollable text area styled as readable paragraphs
+- Back link: “← Back to home”
+
+Overall design rules:
+- Do NOT remove or break existing pages and flows.
+- Keep everything mobile-first and responsive.
+- Reuse the current colors, typography, and card style.
+- Use clear, friendly language and spacious layout so the app feels premium and calming.
