@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react"; // Import both arrows
 import { Layout } from "@/components/Layout";
 import { useLocalization } from "@/lib/localization";
+import visionBoard1 from "@assets/2323E69C-C32D-471B-B21E-FCF5AA675014_1765373308633.png";
+import visionBoard2 from "@assets/8DDF4032-1926-48FC-87AB-FAAA9BA4715D_1765373308634.png";
+import visionBoard3 from "@assets/57E30E58-132C-4500-AFFF-F334F82F89B8_1765373308634.png";
+import visionBoard4 from "@assets/81688D40-7656-4FCA-8701-53590C73F835_1765373308634.png";
 
 export default function Home() {
   const { t, language } = useLocalization();
@@ -73,13 +77,13 @@ export default function Home() {
                 className="space-y-4 pt-12"
               >
                 <img 
-                  src="/images/vision-board-1.jpg" 
-                  alt="לוח חזון לדוגמה – חופשות וים" 
+                  src={visionBoard1} 
+                  alt="לוח חזון לדוגמה 1" 
                   className="w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl rotate-[-2deg] hover:rotate-0 transition-transform duration-500"
                 />
                 <img 
-                  src="/images/vision-board-3.jpg" 
-                  alt="לוח חזון לדוגמה – בריאות ואורח חיים" 
+                  src={visionBoard3} 
+                  alt="לוח חזון לדוגמה 3" 
                   className="w-full aspect-square object-cover rounded-2xl shadow-2xl rotate-[1deg] hover:rotate-0 transition-transform duration-500"
                 />
               </motion.div>
@@ -88,13 +92,13 @@ export default function Home() {
                 className="space-y-4"
               >
                 <img 
-                  src="/images/vision-board-2.jpg" 
-                  alt="לוח חזון לדוגמה – עבודה וחלל ביתי" 
+                  src={visionBoard2} 
+                  alt="לוח חזון לדוגמה 2" 
                   className="w-full aspect-square object-cover rounded-2xl shadow-2xl rotate-[2deg] hover:rotate-0 transition-transform duration-500"
                 />
                 <img 
-                  src="/images/vision-board-4.jpg" 
-                  alt="לוח חזון לדוגמה – אהבה וקשרים" 
+                  src={visionBoard4} 
+                  alt="לוח חזון לדוגמה 4" 
                   className="w-full aspect-[3/4] object-cover rounded-2xl shadow-2xl rotate-[-1deg] hover:rotate-0 transition-transform duration-500"
                 />
               </motion.div>
