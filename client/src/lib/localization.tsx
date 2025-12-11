@@ -153,6 +153,57 @@ const translations: Translations = {
 
   "howItWorks.final.title": { he: "מוכנים לראות את החלומות שלכם על הקיר?", en: "Ready to See Your Dreams on the Wall?" },
   "howItWorks.final.cta": { he: "התחילו עכשיו", en: "Start Now" },
+
+  // Pricing Page
+  "pricing.hero.title": { he: "מחירים", en: "Pricing" },
+  "pricing.hero.subtitle": { he: "בחרו את הדרך המתאימה לכם לעבוד עם VisionAI – לוח חזון דיגיטלי, הדפסה או שניהם.", en: "Choose how you want to use VisionAI – digital vision boards, printing, or both." },
+  "pricing.hero.cta": { he: "התחילו ליצור לוח חזון", en: "Start Creating" },
+
+  "pricing.featured": { he: "מומלץ", en: "Featured" },
+  
+  "pricing.digital.title": { he: "תוכניות דיגיטליות", en: "Digital Plans" },
+  
+  "pricing.free.name": { he: "חינם", en: "Free" },
+  "pricing.free.feature1": { he: "1 לוח חזון חינם", en: "1 free vision board" },
+  "pricing.free.feature2": { he: "הורדה באיכות סטנדרטית", en: "Standard quality download" },
+  "pricing.free.feature3": { he: "ללא התחברות לבית דפוס", en: "No print partner connection" },
+  "pricing.free.button": { he: "נסו בחינם", en: "Try Free" },
+
+  "pricing.creator.name": { he: "יוצר", en: "Creator" },
+  "pricing.creator.feature1": { he: "עד 10 לוחות חזון בחודש", en: "Up to 10 boards per month" },
+  "pricing.creator.feature2": { he: "הורדה באיכות גבוהה", en: "High quality downloads" },
+  "pricing.creator.feature3": { he: "שמירה בהיסטוריה האישית", en: "Save to personal library" },
+  "pricing.creator.button": { he: "התחילו כיוצר", en: "Start Creating" },
+
+  "pricing.pro.name": { he: "מקצועי", en: "Pro" },
+  "pricing.pro.feature1": { he: "ללא הגבלה על כמות לוחות החזון", en: "Unlimited boards" },
+  "pricing.pro.feature2": { he: "עדיפות ביצירת תמונות", en: "Priority image generation" },
+  "pricing.pro.feature3": { he: "תמיכה מועדפת", en: "Priority support" },
+  "pricing.pro.button": { he: "הצטרפו ל-Pro", en: "Join Pro" },
+
+  "pricing.perMonth": { he: "לחודש", en: "per month" },
+
+  "pricing.print.title": { he: "מחירי הדפסה", en: "Printing Options" },
+  "pricing.print.subtitle": { he: "המחיר כולל נייר איכותי, הדפסה מקצועית ואריזה בטוחה.", en: "Prices include quality paper, professional printing, and secure packaging." },
+  "pricing.print.size": { he: "גודל", en: "Size" },
+  "pricing.print.type": { he: "סוג", en: "Type" },
+  "pricing.print.price": { he: "מחיר", en: "Price" },
+  "pricing.print.paperPoster": { he: "פוסטר נייר", en: "Paper poster" },
+  "pricing.print.canvas": { he: "קנבס", en: "Canvas" },
+  "pricing.print.note": { he: "המחירים אינם כוללים משלוח. פרטי המשלוח יוצגו לפני האישור הסופי.", en: "Shipping is not included. Shipping costs are shown before final confirmation." },
+
+  "pricing.faq.title": { he: "שאלות נפוצות", en: "Frequently Asked Questions" },
+  "pricing.faq1.q": { he: "איך משולמים?", en: "How do I pay?" },
+  "pricing.faq1.a": { he: "כרגע התשלום מתבצע ידנית לאחר יצירת ההזמנה, מול בית הדפוס או באמצעות קישור תשלום.", en: "Currently, payment is processed manually after you create an order, either directly with the print partner or via a payment link." },
+
+  "pricing.faq2.q": { he: "האם אפשר ליצור לוחות חזון גם בלי הדפסה?", en: "Can I use VisionAI without printing?" },
+  "pricing.faq2.a": { he: "בוודאי. אפשר להשתמש רק בגרסה הדיגיטלית, להוריד את הלוח ולהדפיס איפה שתרצו.", en: "Absolutely. You can use just the digital version, download your board, and print it anywhere you'd like." },
+
+  "pricing.faq3.q": { he: "האם אפשר לעדכן מחירים בעתיד?", en: "Can pricing change in the future?" },
+  "pricing.faq3.a": { he: "כן. המחירים באתר עשויים להשתנות, אך נעדכן לפני כל שינוי משמעותי.", en: "Yes. Prices may change in the future, but we'll notify you before any significant updates." },
+
+  "pricing.final.title": { he: "מוכנים ליצור את לוח החזון הראשון שלכם?", en: "Ready to Create Your First Vision Board?" },
+  "pricing.final.cta": { he: "התחילו עכשיו", en: "Start Now" },
 };
 
 interface LocalizationContextType {
