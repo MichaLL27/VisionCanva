@@ -1,0 +1,222 @@
+You are editing the VisionAI React + TypeScript app.
+
+Goal:
+Integrate the new ONE-TIME PRICING model directly into the vision board creation and print flow.
+
+PRICING MODEL (FIXED):
+- Digital Vision Board (one-time): 39₪
+- Digital Vision Board + A3 Print (one-time): 89₪
+- Print of Existing Board (one-time, from file upload): 59₪
+
+No subscriptions, no accounts, no login, no recurring billing.
+
+--------------------------------
+1) RESULT SCREEN – ADD ACTIONS WITH PRICES
+
+On the vision board result screen (after image generation), update the UI so that:
+
+- The generated board image is shown at the top.
+- Below the image, add a new section titled (Hebrew by default):
+
+  Title: "מה תרצו לעשות עם לוח החזון הזה?"
+  Subtitle: "בחרו שימוש חד־פעמי – הורדה דיגיטלית, הדפסה או שניהם."
+
+Add TWO main action cards/buttons:
+
+A) DIGITAL ONLY
+- Label Hebrew: "לוח חזון דיגיטלי"
+- Price label: "39 ₪ • תשלום חד־פעמי"
+- Short description: "הורדה באיכות גבוהה לשמירה, שיתוף והדפסה עצמאית."
+- Button text Hebrew: "הורידו לוח דיגיטלי"
+
+B) DIGITAL + PRINT
+- Label Hebrew: "לוח חזון + הדפסה"
+- Price label: "89 ₪ • תשלום חד־פעמי"
+- Short description: "הורדה דיגיטלית + הדפסה מקצועית בגודל A3 לביתכם."
+- Button text Hebrew: "הזמינו הדפסה"
+
+Layout:
+- On desktop: two cards side-by-side.
+- On mobile: stack vertically.
+- Reuse existing card / button components.
+
+--------------------------------
+2) BEHAVIOR – DIGITAL ONLY (39₪)
+
+When the user clicks "הורידו לוח דיגיטלי":
+
+For now we treat payment as manual (no Stripe integration yet).
+
+Implement:
+
+- Open a modal / dialog:
+
+  Title Hebrew: "הורדת לוח חזון דיגיטלי"
+  Text: 
+    "עלות לוח חזון דיגיטלי אחד היא 39 ₪ לתשלום חד־פעמי.
+     בשלב זה התשלום מתבצע ידנית לאחר ההזמנה."
+
+  Form fields:
+    - שם מלא (fullName)
+    - אימייל (email)
+    - טלפון (phone)
+
+  Buttons:
+    - Primary: "אשרו וקבלו קישור להורדה"
+    - Secondary: "ביטול"
+
+- On submit:
+  - Call a backend endpoint: POST /api/order-digital-board
+    Body:
+    {
+      fullName,
+      email,
+      phone,
+      price: 39,
+      currency: "ILS",
+      imageUrl,          // the generated board URL
+      aiPrompt,          // the internal prompt (optional)
+      type: "digital"
+    }
+
+  - For now, backend can simply:
+    - Log / store the order in DB / file / email (implementation can be a placeholder).
+    - Return { success: true, downloadUrl: imageUrl }.
+
+  - On success, close the modal and:
+    - Show a success message:
+      Hebrew: "ההזמנה התקבלה. תוכלו להוריד את לוח החזון עכשיו, ונשלח לכם הוראות תשלום בהמשך."
+    - Trigger the download of the image (or show a “Download now” button linked to downloadUrl).
+
+No login is required.
+
+--------------------------------
+3) BEHAVIOR – DIGITAL + PRINT (89₪)
+
+When the user clicks "הזמינו הדפסה":
+
+- Open a modal / full-screen form for print order:
+
+  Title Hebrew: "הזמנת הדפסה ללוח החזון"
+  Text:
+    "עלות לוח חזון דיגיטלי + הדפסה בגודל A3 היא 89 ₪ לתשלום חד־פעמי.
+     בשלב זה התשלום מתבצע ידנית לאחר אישור ההזמנה."
+
+  Form fields (all required):
+    - שם מלא (fullName)
+    - אימייל (email)
+    - טלפון (phone)
+    - כתובת מלאה למשלוח (address)
+    - עיר (city)
+    - הערות מיוחדות (notes) – optional textarea
+
+  Buttons:
+    - Primary: "שלחו הזמנה להדפסה"
+    - Secondary: "ביטול"
+
+- On submit:
+  - Call backend endpoint: POST /api/order-print-board
+
+    Body example:
+    {
+      fullName,
+      email,
+      phone,
+      address,
+      city,
+      notes,
+      price: 89,
+      currency: "ILS",
+      imageUrl,      // the generated board image
+      aiPrompt,      // the prompt used
+      size: "A3",
+      type: "digital+print"
+    }
+
+  - Backend will:
+    - Store the order for the single partner print shop.
+    - (Optional) send an email to the print shop + the user with order details.
+    - Return { success: true }.
+
+  - On success:
+    - Show confirmation screen:
+
+      Title Hebrew: "ההזמנה התקבלה!"
+      Text:
+        "קיבלנו את הפרטים להדפסה. ניצור אתכם קשר בקרוב להשלמת התשלום ושליחת הלוח המודפס."
+
+    - Provide a link back to homepage or to “create another board”.
+
+--------------------------------
+4) SEPARATE ROUTE – PRINT EXISTING BOARD (59₪)
+
+Create a new simple route/page: /print
+
+- It should allow printing an existing board via file upload.
+
+Page layout (Hebrew default):
+
+Title: "הדפסת לוח חזון קיים"
+Subtitle: "כבר יש לכם לוח חזון מוכן? העלו אותו והזמינו הדפסה."
+
+Elements:
+- File upload input (accept image files).
+- Price label: "59 ₪ להדפסה בגודל A3 (תשלום חד־פעמי)"
+- Same order form fields as the digital+print case:
+  - fullName, email, phone, address, city, notes
+- Button: "שלחו לוח להדפסה"
+
+On submit:
+- POST /api/order-print-existing
+
+  Body:
+  {
+    fullName,
+    email,
+    phone,
+    address,
+    city,
+    notes,
+    price: 59,
+    currency: "ILS",
+    uploadedFileInfo,  // handle according to existing file upload pattern
+    type: "print-only"
+  }
+
+- Same confirmation behavior as above.
+
+Add a small link from the pricing page and from the main navigation to /print.
+
+--------------------------------
+5) UPDATE TEXTS TO REFLECT ONE-TIME MODEL
+
+- Ensure that on the result screen, on /pricing, and on /print:
+  - There is NO reference to:
+    - monthly subscription
+    - account
+    - login
+  - All pricing text clearly uses:
+    - "תשלום חד־פעמי" in Hebrew
+    - "one-time payment" in English.
+
+--------------------------------
+6) TYPE SAFETY & STATE
+
+Frontend should store for the current session:
+- imageUrl: string (generated vision board)
+- aiPrompt: string (optional, not shown to user)
+- lastOrderType: "digital" | "digital+print" | "print-only" | null
+
+Make sure TypeScript types / interfaces are consistent and no unused imports remain.
+
+--------------------------------
+FINAL UX SUMMARY
+
+The final user experience should feel:
+
+1) User creates a vision board (no signup).
+2) On the result screen they see two clear options with prices:
+   - 39₪ → digital download
+   - 89₪ → digital + A3 print
+3) If they choose print of an existing board, they can go to /print (59₪).
+4) Orders are treated as one-time payments; actual payment execution can be manual later (by email / link).
