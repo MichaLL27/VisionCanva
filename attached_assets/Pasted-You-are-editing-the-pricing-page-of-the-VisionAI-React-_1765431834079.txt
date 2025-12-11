@@ -1,0 +1,148 @@
+You are editing the /pricing page of the VisionAI React + TypeScript app.
+
+Goal:
+Completely remove the idea of monthly subscriptions.
+Replace it with simple ONE-TIME usage and ONE-TIME printing options.
+
+IMPORTANT:
+- No “per month” pricing.
+- No subscriptions, no accounts, no login required.
+- All wording must reflect one-time payments per vision board / per print.
+
+--------------------------------
+1) REMOVE SUBSCRIPTION LANGUAGE
+
+- Remove or change every text that says:
+  - "לחודש" (per month)
+  - "מנוי", "תוכנית חודשית", "subscription"
+- Remove any UI that suggests recurring billing or plans.
+
+--------------------------------
+2) UPDATE MAIN SECTION TITLE
+
+Change the main digital plans section title from something like:
+- "תוכניות דיגיטליות"
+
+To:
+- Hebrew: "חבילות לוח חזון חד־פעמיות"
+- English: "One-time Vision Board Packages"
+
+--------------------------------
+3) DEFINE THREE ONE-TIME PLANS (CARDS)
+
+Keep the same card design, but change content:
+
+PLAN 1 – DIGITAL ONLY (ENTRY)
+
+Title (Hebrew): "לוח חזון דיגיטלי"
+Price: "₪39"  (you can adjust later)
+Sub-label: "תשלום חד־פעמי"
+
+Features (Hebrew bullets):
+- "יצירת לוח חזון אחד בעזרת AI"
+- "הורדה באיכות גבוהה"
+- "ללא הדפסה"
+
+Button text (Hebrew):
+- "התחילו ליצור לוח"
+
+On click:
+- Navigate to /create
+
+In English mode:
+- Title: "Digital Vision Board"
+- Sub: "One-time payment"
+- Features adapted to English.
+- Button: "Create a board"
+
+PLAN 2 – DIGITAL + PRINT (POPULAR)
+
+Title (Hebrew): "לוח חזון + הדפסה"
+Price: "₪89" (example; user can later adjust)
+Sub-label: "תשלום חד־פעמי"
+
+Features:
+- "יצירת לוח חזון דיגיטלי אחד"
+- "הדפסה מקצועית בגודל A3"
+- "הכנה לתלייה על הקיר"
+
+Add a small badge on the top-right of the card:
+- Hebrew: "הכי פופולרי"
+
+Button:
+- Hebrew: "לוח + הדפסה"
+- On click: navigate to /create and pre-select a “with print” option in state (or just /create for now).
+
+PLAN 3 – הדפסה בלבד
+
+Title (Hebrew): "הדפסת לוח קיים"
+Price: "₪59" (example)
+Sub-label: "תשלום חד־פעמי"
+
+Features:
+- "הדפסה מלוח חזון שכבר יש לכם"
+- "העלאת קובץ או בחירה מהמערכת"
+- "הדפסה מקצועית בגודל A3"
+
+Button:
+- Hebrew: "שלחו לוח להדפסה"
+- On click: navigate to a future /print route or /create (for now, use /create or /print as a placeholder).
+
+--------------------------------
+4) PRINT PRICING TABLE – PER ORDER
+
+Keep the print pricing section but make it clearly one-time per order.
+
+Section title:
+- Hebrew: "מחירי הדפסה לפי גודל"
+Subtitle:
+- "מחיר לכל הדפסה בודדת (ללא מנוי)."
+
+Table example (Hebrew):
+
+- גודל | סוג | מחיר
+- A4 | פוסטר נייר | 49 ₪
+- A3 | פוסטר נייר | 69 ₪
+- A2 | פוסטר נייר | 119 ₪
+- קנבס 40x60 | קנבס | 179 ₪
+- קנבס 60x90 | קנבס | 249 ₪
+
+Below the table, note in Hebrew:
+- "כל המחירים הם להזמנה חד־פעמית אחת. אפשר להזמין כמה פעמים שתרצו."
+
+In English mode, translate accordingly, but keep same idea: “per print”.
+
+--------------------------------
+5) REMOVE/MODIFY ANY ACCOUNT/LOGIN REFERENCES
+
+- Remove from this page any text that suggests:
+  - user account
+  - managing subscription
+  - monthly quota
+- Pricing page should not depend on login at all.
+
+--------------------------------
+6) CTA SECTION AT BOTTOM
+
+Add a final section:
+
+Hebrew:
+- Text: "מוכנים ליצור את לוח החזון הראשון שלכם?"
+- Button: "התחילו עכשיו" → navigate to /create
+
+English:
+- "Ready to create your first vision board?"
+- Button: "Start now" → /create
+
+--------------------------------
+7) RTL & DESIGN
+
+- Keep existing RTL layout for Hebrew (right-aligned text, cards in correct order).
+- Reuse existing styles: colors, fonts, buttons, cards.
+- Only change texts, labels, and pricing logic/wording as described above.
+
+The final /pricing page must clearly communicate:
+- One-time payment per digital board.
+- Optional one-time payment per board+print.
+- Optional one-time payment for print-only.
+- No subscriptions, no monthly billing.

@@ -153,6 +153,54 @@ const translations: Translations = {
 
   "howItWorks.final.title": { he: "מוכנים לראות את החלומות שלכם על הקיר?", en: "Ready to See Your Dreams on the Wall?" },
   "howItWorks.final.cta": { he: "התחילו עכשיו", en: "Start Now" },
+
+  // Pricing Page
+  "pricing.hero.title": { he: "מחירים שקופים וישירים", en: "Simple, Transparent Pricing" },
+  "pricing.hero.subtitle": { he: "בחרו את החבילה שמתאימה לכם – תשלום חד־פעמי לכל לוח חזון.", en: "Choose the package that fits you – one-time payment per vision board." },
+
+  "pricing.packages.title": { he: "חבילות לוח חזון חד־פעמיות", en: "One-time Vision Board Packages" },
+
+  // Plan 1
+  "pricing.plan1.title": { he: "לוח חזון דיגיטלי", en: "Digital Vision Board" },
+  "pricing.plan1.price": { he: "₪39", en: "$9" },
+  "pricing.plan1.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
+  "pricing.plan1.feature1": { he: "יצירת לוח חזון אחד בעזרת AI", en: "Create one AI-powered vision board" },
+  "pricing.plan1.feature2": { he: "הורדה באיכות גבוהה", en: "Download in high quality" },
+  "pricing.plan1.feature3": { he: "ללא הדפסה", en: "No printing included" },
+  "pricing.plan1.button": { he: "התחילו ליצור לוח", en: "Create a board" },
+
+  // Plan 2 (Popular)
+  "pricing.plan2.title": { he: "לוח חזון + הדפסה", en: "Vision Board + Print" },
+  "pricing.plan2.price": { he: "₪89", en: "$19" },
+  "pricing.plan2.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
+  "pricing.plan2.feature1": { he: "יצירת לוח חזון דיגיטלי אחד", en: "Create one digital vision board" },
+  "pricing.plan2.feature2": { he: "הדפסה מקצועית בגודל A3", en: "Professional A3 size print" },
+  "pricing.plan2.feature3": { he: "הכנה לתלייה על הקיר", en: "Ready to hang on your wall" },
+  "pricing.plan2.badge": { he: "הכי פופולרי", en: "Most Popular" },
+  "pricing.plan2.button": { he: "לוח + הדפסה", en: "Board + Print" },
+
+  // Plan 3
+  "pricing.plan3.title": { he: "הדפסת לוח קיים", en: "Print Existing Board" },
+  "pricing.plan3.price": { he: "₪59", en: "$14" },
+  "pricing.plan3.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
+  "pricing.plan3.feature1": { he: "הדפסה מלוח חזון שכבר יש לכם", en: "Print an existing vision board" },
+  "pricing.plan3.feature2": { he: "העלאת קובץ או בחירה מהמערכת", en: "Upload a file or choose from our gallery" },
+  "pricing.plan3.feature3": { he: "הדפסה מקצועית בגודל A3", en: "Professional A3 size print" },
+  "pricing.plan3.button": { he: "שלחו לוח להדפסה", en: "Print a board" },
+
+  // Print pricing section
+  "pricing.print.title": { he: "מחירי הדפסה לפי גודל", en: "Print Pricing by Size" },
+  "pricing.print.subtitle": { he: "מחיר לכל הדפסה בודדת (ללא מנוי).", en: "Price per individual print (no subscription required)." },
+  "pricing.print.table.size": { he: "גודל", en: "Size" },
+  "pricing.print.table.type": { he: "סוג", en: "Type" },
+  "pricing.print.table.price": { he: "מחיר", en: "Price" },
+  "pricing.print.poster": { he: "פוסטר נייר", en: "Paper Poster" },
+  "pricing.print.canvas": { he: "קנבס", en: "Canvas" },
+  "pricing.print.note": { he: "כל המחירים הם להזמנה חד־פעמית אחת. אפשר להזמין כמה פעמים שתרצו.", en: "All prices are for a single one-time order. You can order multiple times whenever you want." },
+
+  // Final CTA
+  "pricing.final.title": { he: "מוכנים ליצור את לוח החזון הראשון שלכם?", en: "Ready to Create Your First Vision Board?" },
+  "pricing.final.cta": { he: "התחילו עכשיו", en: "Start now" },
 };
 
 interface LocalizationContextType {
