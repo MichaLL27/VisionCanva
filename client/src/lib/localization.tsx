@@ -17,6 +17,7 @@ const translations: Translations = {
   "nav.myAccount": { he: "החשבון שלי", en: "My Account" },
   "nav.signIn": { he: "התחברות", en: "Sign In" },
   "nav.signOut": { he: "התנתקות", en: "Log out" },
+  "nav.print": { he: "הדפסה", en: "Print" },
   "common.back": { he: "חזרה", en: "Back" },
   "common.continue": { he: "המשך", en: "Continue" },
   "common.loading": { he: "טוען...", en: "Loading..." },
@@ -162,7 +163,7 @@ const translations: Translations = {
 
   // Plan 1
   "pricing.plan1.title": { he: "לוח חזון דיגיטלי", en: "Digital Vision Board" },
-  "pricing.plan1.price": { he: "₪39", en: "$9" },
+  "pricing.plan1.price": { he: "₪39", en: "₪39" },
   "pricing.plan1.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
   "pricing.plan1.feature1": { he: "יצירת לוח חזון אחד בעזרת AI", en: "Create one AI-powered vision board" },
   "pricing.plan1.feature2": { he: "הורדה באיכות גבוהה", en: "Download in high quality" },
@@ -171,7 +172,7 @@ const translations: Translations = {
 
   // Plan 2 (Popular)
   "pricing.plan2.title": { he: "לוח חזון + הדפסה", en: "Vision Board + Print" },
-  "pricing.plan2.price": { he: "₪89", en: "$19" },
+  "pricing.plan2.price": { he: "₪89", en: "₪89" },
   "pricing.plan2.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
   "pricing.plan2.feature1": { he: "יצירת לוח חזון דיגיטלי אחד", en: "Create one digital vision board" },
   "pricing.plan2.feature2": { he: "הדפסה מקצועית בגודל A3", en: "Professional A3 size print" },
@@ -181,7 +182,7 @@ const translations: Translations = {
 
   // Plan 3
   "pricing.plan3.title": { he: "הדפסת לוח קיים", en: "Print Existing Board" },
-  "pricing.plan3.price": { he: "₪59", en: "$14" },
+  "pricing.plan3.price": { he: "₪59", en: "₪59" },
   "pricing.plan3.sub": { he: "תשלום חד־פעמי", en: "One-time payment" },
   "pricing.plan3.feature1": { he: "הדפסה מלוח חזון שכבר יש לכם", en: "Print an existing vision board" },
   "pricing.plan3.feature2": { he: "העלאת קובץ או בחירה מהמערכת", en: "Upload a file or choose from our gallery" },
@@ -201,6 +202,58 @@ const translations: Translations = {
   // Final CTA
   "pricing.final.title": { he: "מוכנים ליצור את לוח החזון הראשון שלכם?", en: "Ready to Create Your First Vision Board?" },
   "pricing.final.cta": { he: "התחילו עכשיו", en: "Start now" },
+
+  // Result Page - Action Cards
+  "result.actions.title": { he: "מה תרצו לעשות עם לוח החזון הזה?", en: "What would you like to do with your vision board?" },
+  "result.actions.subtitle": { he: "בחרו שימוש חד־פעמי – הורדה דיגיטלית, הדפסה או שניהם.", en: "Choose a one-time option – digital download, print, or both." },
+
+  "result.digital.title": { he: "לוח חזון דיגיטלי", en: "Digital Vision Board" },
+  "result.digital.priceLabel": { he: "תשלום חד־פעמי", en: "One-time payment" },
+  "result.digital.description": { he: "הורדה באיכות גבוהה לשמירה, שיתוף והדפסה עצמאית.", en: "High-quality download for saving, sharing, and self-printing." },
+  "result.digital.button": { he: "הורידו לוח דיגיטלי", en: "Download Digital Board" },
+
+  "result.print.title": { he: "לוח חזון + הדפסה", en: "Vision Board + Print" },
+  "result.print.priceLabel": { he: "תשלום חד־פעמי", en: "One-time payment" },
+  "result.print.description": { he: "הורדה דיגיטלית + הדפסה מקצועית בגודל A3 לביתכם.", en: "Digital download + professional A3 print delivered to your home." },
+  "result.print.button": { he: "הזמינו הדפסה", en: "Order Print" },
+  "result.print.badge": { he: "הכי פופולרי", en: "Most Popular" },
+
+  // Order Modals
+  "order.digital.title": { he: "הורדת לוח חזון דיגיטלי", en: "Download Digital Vision Board" },
+  "order.digital.text": { he: "עלות לוח חזון דיגיטלי אחד היא 39 ₪ לתשלום חד־פעמי. בשלב זה התשלום מתבצע ידנית לאחר ההזמנה.", en: "The cost of one digital vision board is ₪39 (one-time payment). Payment is currently processed manually after the order." },
+  "order.digital.submit": { he: "אשרו וקבלו קישור להורדה", en: "Confirm and Get Download Link" },
+
+  "order.print.title": { he: "הזמנת הדפסה ללוח החזון", en: "Order Vision Board Print" },
+  "order.print.text": { he: "עלות לוח חזון דיגיטלי + הדפסה בגודל A3 היא 89 ₪ לתשלום חד־פעמי. בשלב זה התשלום מתבצע ידנית לאחר אישור ההזמנה.", en: "The cost of digital vision board + A3 print is ₪89 (one-time payment). Payment is currently processed manually after the order." },
+  "order.print.submit": { he: "שלחו הזמנה להדפסה", en: "Send Print Order" },
+
+  "order.form.fullName": { he: "שם מלא", en: "Full Name" },
+  "order.form.email": { he: "אימייל", en: "Email" },
+  "order.form.phone": { he: "טלפון", en: "Phone" },
+  "order.form.address": { he: "כתובת מלאה למשלוח", en: "Full Shipping Address" },
+  "order.form.city": { he: "עיר", en: "City" },
+  "order.form.notes": { he: "הערות מיוחדות", en: "Special Notes" },
+  "order.form.cancel": { he: "ביטול", en: "Cancel" },
+
+  "order.success.title": { he: "ההזמנה התקבלה!", en: "Order Received!" },
+  "order.success.digitalDesc": { he: "קיבלנו את הפרטים. תוכלו להוריד עכשיו.", en: "We received your details. You can download now." },
+  "order.success.printDesc": { he: "קיבלנו את הפרטים להדפסה. ניצור אתכם קשר בקרוב.", en: "We received your print order. We'll contact you soon." },
+  "order.success.digitalText": { he: "ההזמנה התקבלה. תוכלו להוריד את לוח החזון עכשיו, ונשלח לכם הוראות תשלום בהמשך.", en: "Order received. You can download your vision board now, and we'll send payment instructions soon." },
+  "order.success.printText": { he: "קיבלנו את הפרטים להדפסה. ניצור אתכם קשר בקרוב להשלמת התשלום ושליחת הלוח המודפס.", en: "We received your print order details. We'll contact you soon to complete payment and ship your printed board." },
+  "order.success.close": { he: "סגירה", en: "Close" },
+  "order.success.createAnother": { he: "יצירת לוח נוסף", en: "Create Another Board" },
+  "order.error": { he: "משהו השתבש בעת עיבוד ההזמנה. אנא נסו שוב.", en: "Something went wrong while processing your order. Please try again." },
+
+  // Print Existing Page
+  "print.title": { he: "הדפסת לוח חזון קיים", en: "Print Existing Vision Board" },
+  "print.subtitle": { he: "כבר יש לכם לוח חזון מוכן? העלו אותו והזמינו הדפסה.", en: "Already have a vision board? Upload it and order a print." },
+  "print.uploadLabel": { he: "העלו את לוח החזון שלכם", en: "Upload your vision board" },
+  "print.uploadPlaceholder": { he: "לחצו להעלאת קובץ תמונה", en: "Click to upload an image file" },
+  "print.priceLabel": { he: "הדפסה בגודל A3", en: "A3 Size Print" },
+  "print.priceNote": { he: "תשלום חד־פעמי להדפסה מקצועית ומשלוח", en: "One-time payment for professional print and shipping" },
+  "print.submitButton": { he: "שלחו לוח להדפסה", en: "Send Board to Print" },
+  "print.errorNoFile": { he: "נא להעלות קובץ תמונה", en: "Please upload an image file" },
+  "print.backHome": { he: "חזרה לדף הבית", en: "Back to Homepage" },
 };
 
 interface LocalizationContextType {

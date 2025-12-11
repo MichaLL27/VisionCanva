@@ -120,5 +120,167 @@ export async function registerRoutes(
     }
   });
 
+  // Order digital board (39₪)
+  app.post("/api/order-digital-board", async (req, res) => {
+    try {
+      const { fullName, email, phone, price, currency, imageUrl, aiPrompt, type } = req.body;
+
+      if (!fullName || !email || !phone) {
+        return res.status(400).json({
+          error: "Please provide all required fields",
+        });
+      }
+
+      // Store order (placeholder - could be database, email, etc.)
+      const order = {
+        id: `digital-${Date.now()}`,
+        fullName,
+        email,
+        phone,
+        price,
+        currency,
+        imageUrl,
+        aiPrompt,
+        type,
+        createdAt: new Date().toISOString(),
+        status: "pending_payment",
+      };
+
+      console.log("Digital order received:", order);
+
+      // In production, this would:
+      // - Store in database
+      // - Send confirmation email to customer
+      // - Send notification to admin
+
+      res.json({
+        success: true,
+        orderId: order.id,
+        downloadUrl: imageUrl || null,
+      });
+    } catch (error) {
+      console.error("Error processing digital order:", error);
+      res.status(500).json({
+        error: "Failed to process order. Please try again.",
+      });
+    }
+  });
+
+  // Order print board (89₪ digital + print)
+  app.post("/api/order-print-board", async (req, res) => {
+    try {
+      const {
+        fullName,
+        email,
+        phone,
+        address,
+        city,
+        notes,
+        price,
+        currency,
+        imageUrl,
+        aiPrompt,
+        size,
+        type,
+      } = req.body;
+
+      if (!fullName || !email || !phone || !address || !city) {
+        return res.status(400).json({
+          error: "Please provide all required fields",
+        });
+      }
+
+      // Store order
+      const order = {
+        id: `print-${Date.now()}`,
+        fullName,
+        email,
+        phone,
+        address,
+        city,
+        notes,
+        price,
+        currency,
+        imageUrl,
+        aiPrompt,
+        size,
+        type,
+        createdAt: new Date().toISOString(),
+        status: "pending_payment",
+      };
+
+      console.log("Print order received:", order);
+
+      // In production, this would:
+      // - Store in database
+      // - Send confirmation email to customer
+      // - Send order to print shop
+      // - Send notification to admin
+
+      res.json({
+        success: true,
+        orderId: order.id,
+      });
+    } catch (error) {
+      console.error("Error processing print order:", error);
+      res.status(500).json({
+        error: "Failed to process order. Please try again.",
+      });
+    }
+  });
+
+  // Order print of existing board (59₪)
+  app.post("/api/order-print-existing", async (req, res) => {
+    try {
+      const {
+        fullName,
+        email,
+        phone,
+        address,
+        city,
+        notes,
+        price,
+        currency,
+        uploadedFileInfo,
+        type,
+      } = req.body;
+
+      if (!fullName || !email || !phone || !address || !city) {
+        return res.status(400).json({
+          error: "Please provide all required fields",
+        });
+      }
+
+      // Store order
+      const order = {
+        id: `existing-${Date.now()}`,
+        fullName,
+        email,
+        phone,
+        address,
+        city,
+        notes,
+        price,
+        currency,
+        uploadedFileInfo,
+        type,
+        createdAt: new Date().toISOString(),
+        status: "pending_payment",
+      };
+
+      console.log("Print existing order received:", order);
+
+      res.json({
+        success: true,
+        orderId: order.id,
+      });
+    } catch (error) {
+      console.error("Error processing existing print order:", error);
+      res.status(500).json({
+        error: "Failed to process order. Please try again.",
+      });
+    }
+  });
+
   return httpServer;
 }

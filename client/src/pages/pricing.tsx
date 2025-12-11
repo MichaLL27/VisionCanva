@@ -51,7 +51,7 @@ export default function Pricing() {
       ],
       buttonKey: "pricing.plan3.button",
       featured: false,
-      href: "/create",
+      href: "/print",
     },
   ];
 

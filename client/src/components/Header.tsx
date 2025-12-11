@@ -24,6 +24,7 @@ export function Header() {
       <div className="hidden md:flex items-center gap-8">
         <Link href="/how-it-works"><span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">{t("nav.howItWorks")}</span></Link>
         <Link href="/pricing"><span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">{t("nav.pricing")}</span></Link>
+        <Link href="/print"><span className="text-sm font-medium hover:text-primary cursor-pointer transition-colors">{t("nav.print")}</span></Link>
         
         <button 
           onClick={toggleLanguage}
@@ -80,6 +81,7 @@ export function Header() {
           >
             <Link href="/how-it-works"><span className="text-lg font-medium">{t("nav.howItWorks")}</span></Link>
             <Link href="/pricing"><span className="text-lg font-medium">{t("nav.pricing")}</span></Link>
+            <Link href="/print"><span className="text-lg font-medium">{t("nav.print")}</span></Link>
             <div className="h-px bg-gray-100 my-2" />
             <Link href="/account"><span className="text-lg font-medium">{t("nav.myAccount")}</span></Link>
             <Link href="/auth/sign-in">
