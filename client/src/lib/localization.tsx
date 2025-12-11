@@ -114,6 +114,45 @@ const translations: Translations = {
   "footer.company": { he: "חברה", en: "Company" },
   "footer.legal": { he: "משפטי", en: "Legal" },
   "footer.social": { he: "חברתי", en: "Social" },
+
+  // How It Works Page
+  "howItWorks.hero.title": { he: "איך זה עובד?", en: "How It Works" },
+  "howItWorks.hero.subtitle": { he: "תוך כמה דקות, החלומות שלכם הופכים ללוח חזון מוכן להדפסה.", en: "In just minutes, your dreams transform into a print-ready vision board." },
+  "howItWorks.hero.point1": { he: "כותבים את החלומות והיעדים שלכם", en: "Write your dreams and goals" },
+  "howItWorks.hero.point2": { he: "ה-AI יוצר פרומפט חכם ומדויק", en: "AI creates a smart, detailed prompt" },
+  "howItWorks.hero.point3": { he: "ה-AI מעצב לוח חזון אחד חזק", en: "AI designs your powerful vision board" },
+  "howItWorks.hero.point4": { he: "מוכנים להדפסה ולתלייה על הקיר", en: "Ready to print and hang on your wall" },
+  "howItWorks.hero.cta": { he: "התחילו ליצור לוח חזון", en: "Start Creating Your Vision Board" },
+
+  "howItWorks.steps.title": { he: "4 שלבים פשוטים", en: "4 Simple Steps" },
+  "howItWorks.step1.title": { he: "כותבים את החלום", en: "Write your dreams" },
+  "howItWorks.step1.desc": { he: "כתבו בצורה חופשית איך אתם רוצים שחייכם ייראו ויירגישו – בלי חוקים, פשוט מהלב.", en: "Write freely how you want your life to look and feel – no rules, straight from your heart." },
+
+  "howItWorks.step2.title": { he: "ה-AI מנסח פרומפט חכם", en: "AI Creates a Smart Prompt" },
+  "howItWorks.step2.desc": { he: "המערכת שולחת את הטקסט שלכם ל-ChatGPT, שיוצר פרומפט ארוך, ברור ומדויק ליצירת תמונה.", en: "Our system sends your text to ChatGPT, which creates a detailed, clear prompt perfect for image generation." },
+
+  "howItWorks.step3.title": { he: "ה-AI מעצב את לוח החזון", en: "AI Designs Your Vision Board" },
+  "howItWorks.step3.desc": { he: "הפרומפט נשלח למודל תמונה, שמייצר לוח חזון קולנועי ואיכותי שמייצג את החלומות שלכם.", en: "The prompt goes to an image model, which generates a cinematic, high-quality vision board that represents your dreams." },
+
+  "howItWorks.step4.title": { he: "מוכנים להדפסה", en: "Ready to Print" },
+  "howItWorks.step4.desc": { he: "אפשר להוריד את לוח החזון כתמונה/PDF, או לשלוח אותו לבית הדפוס להדפסה מקצועית.", en: "Download your vision board as an image or PDF, or send it to our printing partners for professional printing." },
+
+  "howItWorks.demo.title": { he: "מילים הופכות לתמונה", en: "Words Become Images" },
+  "howItWorks.demo.text": { he: "התהליך פשוט: אתם כותבים את החלומות שלכם, והבינה המלאכותית מתרגמת זאת לתמונה יפה ומשראית.", en: "It's simple: you write your dreams, and AI translates them into a beautiful, inspiring image." },
+  "howItWorks.demo.highlight": { he: "המעבר בין מילים לתמונה נעשה אוטומטית – אתם רק כותבים, וה-AI עושה את השאר.", en: "The conversion from words to images happens automatically – you just write, and AI does the rest." },
+
+  "howItWorks.faq.title": { he: "שאלות נפוצות", en: "Frequently Asked Questions" },
+  "howItWorks.faq1.q": { he: "האם אני צריך לכתוב באנגלית?", en: "Do I need to write in English?" },
+  "howItWorks.faq1.a": { he: "לא. אפשר לכתוב בעברית או בכל שפה אחרת – אנחנו ממירים את הכל לפרומפט באנגלית מאחורי הקלעים.", en: "No. You can write in Hebrew or any other language – we automatically convert it to an English prompt behind the scenes." },
+
+  "howItWorks.faq2.q": { he: "האם אפשר ליצור כמה לוחות?", en: "Can I create multiple vision boards?" },
+  "howItWorks.faq2.a": { he: "כן. אפשר ליצור כמה שתרצו, וליצור וריאציות שונות לאותו חלום.", en: "Yes. You can create as many as you want and generate different variations of the same dream." },
+
+  "howItWorks.faq3.q": { he: "איך עובד עניין ההדפסה?", en: "How does printing work?" },
+  "howItWorks.faq3.a": { he: "לאחר יצירת הלוח תוכלו לבחור להוריד אותו או לשלוח אותו להדפסה לבית דפוס שותף. אנחנו דואגים לכל הפרטים.", en: "After creating your board, you can choose to download it or send it to our printing partners for professional printing. We handle all the details." },
+
+  "howItWorks.final.title": { he: "מוכנים לראות את החלומות שלכם על הקיר?", en: "Ready to See Your Dreams on the Wall?" },
+  "howItWorks.final.cta": { he: "התחילו עכשיו", en: "Start Now" },
 };
 
 interface LocalizationContextType {

@@ -1,0 +1,93 @@
+You are editing a React + TypeScript app called VisionAI.
+We already have a header menu item called “איך זה עובד” but the page/route does not exist yet.
+
+TASK: 
+Create a full “How It Works / איך זה עובד” page and wire it into the routing, using the existing design system (colors, typography, buttons, RTL Hebrew by default, with EN toggle).
+
+TECH + ROUTING:
+- Create a new React component: src/pages/HowItWorks.tsx (or similar, depending on project structure).
+- Add a new route, e.g. /how-it-works (and also support /he/how-it-works or /en/how-it-works if the app uses localized routing).
+- Make the “איך זה עובד” menu item navigate to this new route.
+- Keep RTL layout when language is Hebrew.
+
+PAGE LAYOUT (DESKTOP + MOBILE):
+
+Section 1 – Hero
+- Full-width section with a light warm background (same as homepage).
+- Right-aligned title in Hebrew (default language):
+  - "איך זה עובד?"
+- Subtitle in Hebrew:
+  - "תוך כמה דקות, החלומות שלכם הופכים ללוח חזון מוכן להדפסה."
+- Short bullet list:
+  - "כותבים את החלומות והיעדים שלכם"
+  - "ה-AI יוצר פרומפט חכם ומדויק"
+  - "ה-AI מעצב לוח חזון אחד חזק"
+  - "מוכנים להדפסה ולתלייה על הקיר"
+- CTA button: 
+  - Label Hebrew: "התחילו ליצור לוח חזון"
+  - On click: navigate to /create
+
+Section 2 – Step-by-Step Timeline
+- A vertical or horizontal 4-step timeline component.
+- Each step is a rounded card with icon, title, and description.
+- Titles + descriptions in Hebrew; also prepare English strings for localization.
+
+Steps (Hebrew texts):
+
+1) כותבים את החלום
+   - Description: "כתבו בצורה חופשית איך אתם רוצים שחייכם ייראו ויירגישו – בלי חוקים, פשוט מהלב."
+
+2) ה-AI מנסח פרומפט חכם
+   - Description: "המערכת שולחת את הטקסט שלכם ל-ChatGPT, שיוצר פרומפט ארוך, ברור ומדויק ליצירת תמונה."
+
+3) ה-AI מעצב את לוח החזון
+   - Description: "הפרומפט נשלח למודל תמונה, שמייצר לוח חזון קולנועי ואיכותי שמייצג את החלומות שלכם."
+
+4) מוכנים להדפסה
+   - Description: "אפשר להוריד את לוח החזון כתמונה/‏PDF, או לשלוח אותו לבית הדפוס להדפסה מקצועית."
+
+For English (if language is EN), prepare equivalent strings:
+1) “Write your dreams”
+2) “AI creates a smart prompt”
+3) “AI designs your vision board”
+4) “Ready to print”
+
+Section 3 – Visual Demo
+- Add a section with two columns (stacked on mobile):
+  - Left: an illustration or screenshot of the “dream input” screen.
+  - Right: an illustration or screenshot of the final vision board.
+- Below it, a short text:
+  - Hebrew: "המעבר בין מילים לתמונה נעשה אוטומטית – אתם רק כותבים, וה-AI עושה את השאר."
+
+Section 4 – FAQ Preview
+- Simple list of 3–4 questions with short answers.
+- Example Q&As in Hebrew:
+  - "האם אני צריך לכתוב באנגלית?" → "לא. אפשר לכתוב בעברית או בכל שפה אחרת – אנחנו ממירים את הכל לפרומפט באנגלית מאחורי הקלעים."
+  - "האם אפשר ליצור כמה לוחות?" → "כן. אפשר ליצור כמה שתרצו, וליצור וריאציות שונות לאותו חלום."
+  - "איך עובד עניין ההדפסה?" → "לאחר יצירת הלוח תוכלו לבחור להוריד אותו או לשלוח אותו להדפסה לבית דפוס שותף."
+
+Section 5 – Final CTA
+- Centered text:
+  - Hebrew: "מוכנים לראות את החלומות שלכם על הקיר?"
+- Button:
+  - "התחילו עכשיו" → navigate to /create
+
+STYLING + DESIGN:
+- Reuse existing global styles: colors, fonts, button components, card components.
+- Make sure all Hebrew text is RTL and right-aligned.
+- Honor the language toggle:
+  - When language = EN, show English titles/subtitles and flip layout to LTR.
+- On mobile, all sections should stack vertically with good spacing.
+
+IMPLEMENTATION DETAILS:
+1. Create the HowItWorks page component with props/hooks for current language (use the same i18n / context solution as the rest of the app).
+2. Use a simple translations object inside the component (or the existing i18n system) for Hebrew + English strings.
+3. Add this page to the router.
+4. Update the navigation menu:
+   - When clicking “איך זה עובד” in Hebrew or “How it works” in English, open the new page.
+5. Ensure TypeScript types compile and there are no unused imports.
+
+The final result: 
+- The “How it works / איך זה עובד” page clearly explains the simplified 2-step flow:
+  user text → AI prompt → AI image (vision board) → print.
+- It matches the existing VisionAI design and works in both Hebrew (RTL default) and English.

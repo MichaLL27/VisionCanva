@@ -9,6 +9,7 @@ import Home from "@/pages/home";
 import Create from "@/pages/create";
 import Result from "@/pages/result";
 import Success from "@/pages/success";
+import HowItWorks from "@/pages/how-it-works";
 
 // New Pages
 import SignIn from "@/pages/auth/sign-in";
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/create" component={Create}/>
       <Route path="/result" component={Result}/>
       <Route path="/success" component={Success}/> {/* Keeping old success for backward compatibility or direct link */}
+      <Route path="/how-it-works" component={HowItWorks}/>
       
       {/* Auth */}
       <Route path="/auth/sign-in" component={SignIn}/>
