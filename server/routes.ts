@@ -236,10 +236,10 @@ async function generateImageFromPrompt(imagePrompt: string): Promise<{ imageUrl:
   throw new Error("Failed to generate image with Gemini 3.0.");
 }
 
-export async function registerRoutes(
+export function registerRoutes(
   httpServer: Server,
   app: Express
-): Promise<Server> {
+): Server {
   // Generate prompt from dreams text
   app.post("/api/generatePrompt", async (req, res) => {
     try {

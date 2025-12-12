@@ -5,20 +5,15 @@ import { createServer } from "http";
 const app = express();
 const httpServer = createServer(app);
 
-app.use(
-  express.json({
-    verify: (req, _res, buf) => {
-      (req as any).rawBody = buf;
-    },
-  }),
-);
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Register routes
-registerRoutes(httpServer, app).catch((err) => {
-  console.error("Failed to register routes:", err);
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
 });
+
+// Register routes
+registerRoutes(httpServer, app);
 
 // Error handling middleware
 app.use((err: any, req: any, res: any, next: any) => {
