@@ -54,6 +54,10 @@ const translations: Translations = {
   "create.generatePrompt": { he: "צרו פרומפט", en: "Generate Prompt" },
   "create.errorTooShort": { he: "נא להזין תיאור ארוך יותר של החזון שלכם", en: "Please write a longer description of your dreams" },
 
+  "create.style1": { he: "ראשון", en: "Option 1" },
+  "create.style2": { he: "שני", en: "Option 2" },
+  "create.style3": { he: "שלישי", en: "Option 3" },
+
   "create.promptTitle": { he: "פרומפט AI ללוח החזון שלך", en: "AI Prompt for Your Vision Board" },
   "create.promptSubtitle": { he: "זה הפרומפט שהבינה המלאכותית תשתמש בו ליצירת לוח החזון שלך.", en: "This is the prompt the AI will use to create your vision board image." },
   "create.generateBoard": { he: "צרו לוח חזון", en: "Generate Vision Board" },

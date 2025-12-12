@@ -8,11 +8,12 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 
-type Step = "dreams" | "prompt" | "loading";
+type Step = "style-selection" | "dreams" | "prompt" | "loading";
 
 export default function Create() {
   const [_, setLocation] = useLocation();
-  const [step, setStep] = useState<Step>("dreams");
+  const [step, setStep] = useState<Step>("style-selection");
+  const [selectedStyle, setSelectedStyle] = useState<string>("corkboard");
   const [dreamsText, setDreamsText] = useState("");
   const [currentPrompt, setCurrentPrompt] = useState("");
   const { t, language } = useLocalization();
@@ -26,7 +27,7 @@ export default function Create() {
       const res = await apiRequest<{ prompt: string }>(
         "POST",
         "/api/generatePrompt",
-        { dreamsText: text }
+        { dreamsText: text, style: selectedStyle }
       );
       return res.prompt;
     },
@@ -141,8 +142,93 @@ export default function Create() {
   return (
     <Layout hideFooter>
       <div className="min-h-screen bg-background flex flex-col">
-        <main className="flex-1 max-w-3xl mx-auto w-full px-6 py-12 flex flex-col">
+        <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-12 flex flex-col">
           <AnimatePresence mode="wait">
+            {step === "style-selection" && (
+              <motion.div
+                key="style-selection"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="flex-1 flex flex-col"
+              >
+                <h1 className="text-4xl md:text-5xl font-display font-bold mb-6 text-center">
+                  Choose Your Style
+                </h1>
+                <p className="text-muted-foreground text-lg mb-12 text-center max-w-2xl mx-auto">
+                  Select the aesthetic for your vision board.
+                </p>
+
+                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                  {/* Option 1: Corkboard */}
+                  <div 
+                    onClick={() => {
+                      setSelectedStyle("corkboard");
+                      setStep("dreams");
+                    }}
+                    className="cursor-pointer group relative aspect-[3/4] bg-amber-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
+                  >
+                    <img 
+                      src="/first.jpeg" 
+                      alt="First Style" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                      {t("create.style1")}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-medium text-center">Classic & Organic</p>
+                    </div>
+                  </div>
+
+                  {/* Option 2: Minimalist */}
+                  <div 
+                    onClick={() => {
+                      setSelectedStyle("minimalist");
+                      setStep("dreams");
+                    }}
+                    className="cursor-pointer group relative aspect-[3/4] bg-gray-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
+                  >
+                    <img 
+                      src="/second.jpeg" 
+                      alt="Second Style" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                      {t("create.style2")}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-medium text-center">Clean & Modern</p>
+                    </div>
+                  </div>
+
+                  {/* Option 3: Cinematic */}
+                  <div 
+                    onClick={() => {
+                      setSelectedStyle("cinematic");
+                      setStep("dreams");
+                    }}
+                    className="cursor-pointer group relative aspect-[3/4] bg-slate-800 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
+                  >
+                    <img 
+                      src="/third.jpeg" 
+                      alt="Third Style" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                      {t("create.style3")}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-medium text-center text-black">Moody & Deep</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             {step === "dreams" && (
               <motion.div
                 key="dreams"
