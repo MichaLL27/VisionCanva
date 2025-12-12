@@ -159,7 +159,7 @@ export default function Create() {
                   Select the aesthetic for your vision board.
                 </p>
 
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                   {/* Option 1: Corkboard */}
                   <div 
                     onClick={() => {
@@ -178,7 +178,7 @@ export default function Create() {
                       {t("create.style1")}
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center">Classic & Organic</p>
+                      <p className="text-sm font-medium text-center">{t("create.style1Desc")}</p>
                     </div>
                   </div>
 
@@ -200,7 +200,7 @@ export default function Create() {
                       {t("create.style2")}
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center">Clean & Modern</p>
+                      <p className="text-sm font-medium text-center">{t("create.style2Desc")}</p>
                     </div>
                   </div>
 
@@ -222,7 +222,51 @@ export default function Create() {
                       {t("create.style3")}
                     </div>
                     <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center text-black">Moody & Deep</p>
+                      <p className="text-sm font-medium text-center text-black">{t("create.style3Desc")}</p>
+                    </div>
+                  </div>
+
+                  {/* Option 4: Scrapbook */}
+                  <div 
+                    onClick={() => {
+                      setSelectedStyle("scrapbook");
+                      setStep("dreams");
+                    }}
+                    className="cursor-pointer group relative aspect-[3/4] bg-pink-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
+                  >
+                    <img 
+                      src="/fourth.jpeg" 
+                      alt="Fourth Style" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                      {t("create.style4")}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-medium text-center text-black">{t("create.style4Desc")}</p>
+                    </div>
+                  </div>
+
+                  {/* Option 5: Neon */}
+                  <div 
+                    onClick={() => {
+                      setSelectedStyle("neon");
+                      setStep("dreams");
+                    }}
+                    className="cursor-pointer group relative aspect-[3/4] bg-purple-900 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
+                  >
+                    <img 
+                      src="/five.jpeg" 
+                      alt="Fifth Style" 
+                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                      {t("create.style5")}
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                      <p className="text-sm font-medium text-center text-black">{t("create.style5Desc")}</p>
                     </div>
                   </div>
                 </div>

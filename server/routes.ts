@@ -107,6 +107,70 @@ async function generatePromptFromDreams(dreamsText: string, style: string = "cor
 
         User Dreams: "${dreamsText}"
         Output ONLY the final prompt string. If the User Dreams are in Hebrew, the entire output prompt MUST be in Hebrew.`;
+  // Style 4: Scrapbook -> RENAMED: Vintage Journal (Antique & Tactile)
+    // ეს სტილი ახლა არის ანტიკვარული დღიური: დაძველებული ქაღალდი, გამხმარი ყვავილები, ცვილის ბეჭდები.
+    } else if (style === "scrapbook") {
+      systemPrompt = `You are an antique archivist and historian.
+        THE GOAL: Create a prompt for a "Vintage Journal Vision Board" that feels like an ancient, treasured artifact.
+
+        REQUIRED STYLE:
+        - "Surface: Open, aged leather-bound journal with textured, water-stained parchment paper"
+        - "Items: Sepia-toned photographs held by old-fashioned photo corners (not tape)"
+        - "Decor: Pressed dried flowers and leaves, wax seals, old ribbon, ink sketches (visuals only, no text)"
+        - "Vibe: Historical, nostalgic, very tactile, museum quality"
+
+        STRUCTURE THE PROMPT EXACTLY LIKE THIS:
+        "A top-down photograph of an open antique leather journal resting on a wooden table.
+        The pages are made of thick, textured, aged parchment paper with water stains and creased edges.
+        Arranged delicately on the pages are 6-8 sepia-toned, faded photographs held in place by vintage photo corners.
+        Surrounding the photos are pressed dried botanicals (ferns, flowers), melted wax seals, and faint ink sketches of maps or symbols relevant to the dreams.
+        
+        The Vintage Journal Content:
+        1. [Photo 1: An old, sepia-toned photograph of... extraction from user dream]
+        2. [Photo 2: ... ]
+        3. [Photo 3: ... ]
+        4. [Photo 4: ... ]
+        5. [Photo 5: ... ]
+        6. [Photo 6: ... ]
+
+        Technical details: Natural light, macro details showing the texture of old paper, dry brittle leaves, and cracked wax. Warm, muted color palette.
+        IMPORTANT: NO TEXT, NO CAPTIONS, NO WORDS in the image."
+
+        User Dreams: "${dreamsText}"
+        Output ONLY the final prompt string. If the User Dreams are in Hebrew, the entire output prompt MUST be in Hebrew.`;
+
+    // Style 5: Neon -> RENAMED: Industrial Neon Art (Physical & Gritty)
+    // ეს სტილი ახლა არის ფიზიკური ნეონის მილები ბეტონის კედელზე. უფრო რეალური და უხეში.
+    } else if (style === "neon") {
+      systemPrompt = `You are an Expedition Planner and Adventure Photographer.
+        THE GOAL: Create a prompt for a "Travel Map Vision Board" where goals are plotted on a map.
+
+        REQUIRED STYLE:
+        - "Surface: A large, detailed vintage world map spread flat on a wooden table"
+        - "Items: Printed photographs pinned to specific locations on the map with brass push-pins"
+        - "Decor: Red string connecting the photos (like a journey path), a vintage compass, travel tickets"
+        - "Vibe: Adventure, exploration, global planning, discovery"
+
+        STRUCTURE THE PROMPT EXACTLY LIKE THIS:
+        "A high-resolution, top-down photograph of a large vintage world map spread out on a rustic wooden surface.
+        Pinned firmly to the map are 6-8 distinct printed photographs, marking different destinations and goals.
+        Some photos are connected by a thin red string, suggesting a planned journey or connection between dreams.
+        Scattered casually around the map are travel artifacts: a brass compass, a passport, and maybe a camera lens.
+        The lighting is warm and golden, highlighting the texture of the map paper and the glossy photos.
+
+        The Map Content:
+        1. [Photo 1: A photo of... extraction from user dream]
+        2. [Photo 2: ... ]
+        3. [Photo 3: ... ]
+        4. [Photo 4: ... ]
+        5. [Photo 5: ... ]
+        6. [Photo 6: ... ]
+
+        Technical details: Shot on 35mm film, sharp focus on the photos and map details, rich colors, adventurous aesthetic.
+        IMPORTANT: NO TEXT, NO CAPTIONS, NO WORDS in the image."
+
+        User Dreams: "${dreamsText}"
+        Output ONLY the final prompt string. If the User Dreams are in Hebrew, the entire output prompt MUST be in Hebrew.`;
     // Style 1: Corkboard (Classic & Organic) - Default
     } else {
       systemPrompt = `You are a Prop Master for a movie set. 

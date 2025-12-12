@@ -57,6 +57,14 @@ const translations: Translations = {
   "create.style1": { he: "ראשון", en: "Option 1" },
   "create.style2": { he: "שני", en: "Option 2" },
   "create.style3": { he: "שלישי", en: "Option 3" },
+  "create.style4": { he: "רביעי", en: "Option 4" },
+  "create.style5": { he: "חמישי", en: "Option 5" },
+
+  "create.style1Desc": { he: "קלאסי ואורגני", en: "Classic & Organic" },
+  "create.style2Desc": { he: "נקי ומודרני", en: "Clean & Modern" },
+  "create.style3Desc": { he: "עמוק ודרמטי", en: "Moody & Deep" },
+  "create.style4Desc": { he: "יצירתי ואומנותי", en: "Creative & Artistic" },
+  "create.style5Desc": { he: "עתידני וזוהר", en: "Futuristic & Glowing" },
 
   "create.promptTitle": { he: "פרומפט AI ללוח החזון שלך", en: "AI Prompt for Your Vision Board" },
   "create.promptSubtitle": { he: "זה הפרומפט שהבינה המלאכותית תשתמש בו ליצירת לוח החזון שלך.", en: "This is the prompt the AI will use to create your vision board image." },
