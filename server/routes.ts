@@ -1,77 +1,174 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import OpenAI from "openai";
+// import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY || "mock-key",
-});
+// const openai = new OpenAI({
+//   apiKey: process.env.OPENAI_API_KEY || "mock-key",
+// });
+
+// Initialize Gemini client
+const genAI = process.env.GOOGLE_API_KEY
+  ? new GoogleGenerativeAI(process.env.GOOGLE_API_KEY)
+  : null;
 
 // Generate image prompt from dreams text
-async function generatePromptFromDreams(dreamsText: string): Promise<string> {
-  if (!process.env.OPENAI_API_KEY) {
-    // Mock mode
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    return `A cinematic, luxurious vision board featuring: ${dreamsText}. The image shows a perfect life with golden hour lighting, nature elements, abundance, and freedom. Rich colors, inspiring composition, high-resolution details. Everything the person dreams of visualized in one beautiful, aspirational scene.`;
+// Generate image prompt from dreams text
+async function generatePromptFromDreams(dreamsText: string): Promise<{ prompt: string, provider: string }> {
+  // 1. შემოწმება: არის თუ არა კლიენტი ჩატვირთული
+  if (!genAI) {
+    throw new Error("Google AI client is not initialized. Check your GOOGLE_API_KEY in .env file.");
   }
 
-  const response = await openai.chat.completions.create({
-    model: "gpt-4o",
-    messages: [
-      {
-        role: "system",
-        content: `You receive a user's written dreams, goals, and desired future life.
-Your job is to convert this into ONE long, detailed, clear image-generation prompt in English.
-The prompt should describe a cinematic, high-resolution vision board,
-including relevant scenes, symbols, environments, moods, colors, and composition
-that visually represent the user's dreams and goals.
-Do NOT talk about 'the user' or 'this text'. Just directly describe the image.
-Make it inspiring, luxurious, and achievable-feeling.`,
-      },
-      {
-        role: "user",
-        content: dreamsText,
-      },
-    ],
-    temperature: 0.7,
-  });
+  try {
+    console.log("Using Gemini for prompt generation (Prop Master Mode - Expanded)...");
+    
+    // ვცდილობთ რამდენიმე მოდელს თანმიმდევრობით
+    const modelsToTry = [
+      "gemini-2.0-flash",
+      "gemini-2.0-flash-exp",
+      "gemini-1.5-flash",
+      "gemini-1.5-pro",
+      "gemini-pro"
+    ];
+    
+    let lastError = null;
+    let text = null;
+    let usedModel = "";
 
-  const prompt = response.choices[0]?.message?.content;
-  if (!prompt) {
-    throw new Error("Failed to generate prompt");
+    for (const modelName of modelsToTry) {
+      try {
+        console.log(`Attempting model: ${modelName}...`);
+        const model = genAI.getGenerativeModel({ model: modelName });
+        
+        // განახლებული System Prompt: 6-8 ფოტო და "გადაფარვის" (Overlapping) ინსტრუქცია
+        const systemPrompt = `You are a Prop Master for a movie set. 
+          THE GOAL: Create a prompt for a "Physical Vision Board" that is rich and full of life.
+          
+          CHANGE: The user wants MORE photos on the board. Instead of just 4, aim for **6 to 8 distinct photos**.
+
+          FORBIDDEN WORDS: "Collage", "Cinematic", "Futuristic", "Abstract", "Digital", "Grid"
+
+          REQUIRED STYLE:
+          - "Analog photograph", "Textured cork bulletin board", "Pinned photographs", "Polaroid style"
+          - "Casual arrangement" (photos should look natural, maybe slightly overlapping)
+
+          STRUCTURE THE PROMPT EXACTLY LIKE THIS:
+          "A raw, top-down analog photograph of a large, textured cork bulletin board.
+          Pinned to the board is a collection of 6-8 separate, physical printed photographs (Polaroid style with white borders).
+          The arrangement is natural and messy-chic; some photos slightly overlap.
+          They look like real printed paper with paper grain, casting realistic soft shadows on the cork.
+
+          The Pinned Photos capture these specific details:
+          1. [Photo 1: A vivid, candid shot of... extraction from user dream]
+          2. [Photo 2: A realistic photo of... extraction from user dream]
+          3. [Photo 3: ... ]
+          4. [Photo 4: ... ]
+          5. [Photo 5: ... ]
+          6. [Photo 6: ... ]
+          (Add up to 8 if the user text has enough details. Make each photo distinct.)
+
+          Technical details: Shot on Kodak Portra 400 film, 35mm lens, natural window light from the side, high texture, f/5.6 aperture.
+          IMPORTANT: NO TEXT, NO CAPTIONS, NO WORDS in the image."
+
+          User Dreams: "${dreamsText}"
+          
+          Output ONLY the final prompt string.`;
+
+        const result = await model.generateContent([systemPrompt]);
+        const response = await result.response;
+        text = response.text();
+        
+        if (text) {
+          usedModel = modelName;
+          break; // წარმატება! გამოვდივართ ციკლიდან
+        }
+      } catch (e: any) {
+        console.warn(`⚠️ ${modelName} failed: ${e.message}`);
+        lastError = e;
+      }
+    }
+
+    if (!text) {
+        throw lastError || new Error("All Gemini models failed.");
+    }
+
+    return { prompt: text, provider: `Gemini (${usedModel})` };
+
+  } catch (error: any) {
+    console.error("❌ Gemini Generation Error:", error);
+    throw new Error(`Gemini API Failed: ${error.message}`);
   }
-  return prompt;
+}
+
+// Generate image with Gemini (Imagen)
+// Generate image with Gemini (Imagen)
+async function generateImageWithGemini(prompt: string): Promise<string | null> {
+  console.log("--------------------------------------------------");
+  console.log("🎨 Starting Gemini Image Generation...");
+
+  if (!genAI) {
+    throw new Error("Google AI client is not initialized.");
+  }
+
+  try {
+    // მომხმარებელს სურს საუკეთესო ხარისხი (Gemini 3.0), ამიტომ პირველ რიგში ამას ვცდილობთ
+    const modelName = "gemini-3-pro-image-preview"; 
+    console.log(`🚀 Sending request to ${modelName}...`);
+    
+    const model = genAI.getGenerativeModel({ model: modelName });
+    
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    
+    console.log("✅ Gemini response received");
+
+    // ვეძებთ სურათს პასუხში
+    if (response.candidates && response.candidates[0].content.parts) {
+      for (const part of response.candidates[0].content.parts) {
+        if (part.inlineData && part.inlineData.mimeType.startsWith("image/")) {
+          console.log("✨ Gemini Image generated successfully!");
+          return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+        }
+      }
+    }
+    
+    // თუ სურათი არ დაბრუნდა, ვცადოთ მეორე მოდელი (უფრო სწრაფი, მაგრამ ნაკლები ხარისხის)
+    console.warn("⚠️ First model returned text. Trying fallback: gemini-2.5-flash-image...");
+    const model2 = genAI.getGenerativeModel({ model: "gemini-2.5-flash-image" });
+    const result2 = await model2.generateContent(prompt);
+    const response2 = await result2.response;
+
+    if (response2.candidates && response2.candidates[0].content.parts) {
+        for (const part of response2.candidates[0].content.parts) {
+          if (part.inlineData && part.inlineData.mimeType.startsWith("image/")) {
+            console.log("✨ Gemini Image generated successfully (Fallback)!");
+            return `data:${part.inlineData.mimeType};base64,${part.inlineData.data}`;
+          }
+        }
+    }
+
+    console.warn("⚠️ No image data found. Response text:", response.text());
+    throw new Error("Gemini returned text instead of an image. Please try again.");
+
+  } catch (error: any) {
+    console.error("❌ Gemini Image Gen Exception:", error.message);
+    throw error; 
+  }
 }
 
 // Generate image from prompt
-async function generateImageFromPrompt(imagePrompt: string): Promise<string> {
-  if (!process.env.OPENAI_API_KEY) {
-    // Mock mode - return a random unsplash-like URL
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    const mockImages = [
-      "https://images.unsplash.com/photo-1515042061828-f1b34edcf9f3?w=1024&h=1024&fit=crop",
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1024&h=1024&fit=crop",
-      "https://images.unsplash.com/photo-1506157786151-b8491531f063?w=1024&h=1024&fit=crop",
-      "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe3e?w=1024&h=1024&fit=crop",
-    ];
-    return mockImages[Math.floor(Math.random() * mockImages.length)];
+async function generateImageFromPrompt(imagePrompt: string): Promise<{ imageUrl: string, provider: string }> {
+  // Try Gemini (Imagen) first
+  const geminiImage = await generateImageWithGemini(imagePrompt);
+  if (geminiImage) {
+    return { imageUrl: geminiImage, provider: "Gemini 3.0" };
   }
 
-  const response = await openai.images.generate({
-    model: "dall-e-3",
-    prompt: imagePrompt,
-    n: 1,
-    size: "1024x1024",
-    quality: "hd",
-    style: "natural",
-  });
-
-  const imageUrl = response.data?.[0]?.url;
-  if (!imageUrl) {
-    throw new Error("No image URL returned from OpenAI");
-  }
-  return imageUrl;
+  console.error("❌ Gemini generation failed. No fallback allowed.");
+  throw new Error("Failed to generate image with Gemini 3.0.");
 }
 
 export async function registerRoutes(
@@ -89,17 +186,19 @@ export async function registerRoutes(
         });
       }
 
-      const prompt = await generatePromptFromDreams(dreamsText);
-      res.json({ prompt });
-    } catch (error) {
+      const result = await generatePromptFromDreams(dreamsText);
+      res.json(result);
+    } catch (error: any) {
       console.error("Error generating prompt:", error);
+      const errorMessage = error?.message || "Unknown error";
       res.status(500).json({
-        error: "Failed to generate prompt. Please try again.",
+        error: `Failed to generate prompt: ${errorMessage}`,
       });
     }
   });
 
   // Generate vision board image from prompt
+// Generate vision board image from prompt
   app.post("/api/generateVisionBoard", async (req, res) => {
     try {
       const { prompt } = req.body;
@@ -110,12 +209,18 @@ export async function registerRoutes(
         });
       }
 
-      const imageUrl = await generateImageFromPrompt(prompt);
-      res.json({ imageUrl });
-    } catch (error) {
+      // ვიძახებთ პირდაპირ, helper ფუნქციის გარეშე, რომ ერორი არ დაიკარგოს
+      const imageUrl = await generateImageWithGemini(prompt);
+      
+      res.json({ imageUrl, provider: "Gemini 3.0" });
+
+    } catch (error: any) {
       console.error("Error generating vision board:", error);
+      
+      // ვაბრუნებთ ზუსტ შეცდომას კლიენტთან
       res.status(500).json({
-        error: "Failed to generate vision board. Please try again.",
+        error: error.message || "Failed to generate vision board.",
+        details: error.toString()
       });
     }
   });
@@ -131,7 +236,6 @@ export async function registerRoutes(
         });
       }
 
-      // Store order (placeholder - could be database, email, etc.)
       const order = {
         id: `digital-${Date.now()}`,
         fullName,
@@ -147,11 +251,6 @@ export async function registerRoutes(
       };
 
       console.log("Digital order received:", order);
-
-      // In production, this would:
-      // - Store in database
-      // - Send confirmation email to customer
-      // - Send notification to admin
 
       res.json({
         success: true,
@@ -190,7 +289,6 @@ export async function registerRoutes(
         });
       }
 
-      // Store order
       const order = {
         id: `print-${Date.now()}`,
         fullName,
@@ -210,12 +308,6 @@ export async function registerRoutes(
       };
 
       console.log("Print order received:", order);
-
-      // In production, this would:
-      // - Store in database
-      // - Send confirmation email to customer
-      // - Send order to print shop
-      // - Send notification to admin
 
       res.json({
         success: true,
@@ -251,7 +343,6 @@ export async function registerRoutes(
         });
       }
 
-      // Store order
       const order = {
         id: `existing-${Date.now()}`,
         fullName,

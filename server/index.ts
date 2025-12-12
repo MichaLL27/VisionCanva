@@ -1,7 +1,14 @@
+import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { serveStatic } from "./static";
 import { createServer } from "http";
+
+if (!process.env.OPENAI_API_KEY) {
+  console.warn("Warning: OPENAI_API_KEY is not set in environment variables. Using mock mode.");
+} else {
+  console.log("OPENAI_API_KEY found in environment.");
+}
 
 const app = express();
 const httpServer = createServer(app);

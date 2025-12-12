@@ -46,17 +46,18 @@ export default function Create() {
   // Mutation for generating vision board image
   const generateBoardMutation = useMutation({
     mutationFn: async () => {
-      const res = await apiRequest<{ imageUrl: string }>(
+      const res = await apiRequest<{ imageUrl: string; provider: string }>(
         "POST",
         "/api/generateVisionBoard",
         { prompt: currentPrompt }
       );
-      return res.imageUrl;
+      return res;
     },
-    onSuccess: (imageUrl) => {
+    onSuccess: (data) => {
       const params = new URLSearchParams({
-        imageUrl: encodeURIComponent(imageUrl),
+        imageUrl: encodeURIComponent(data.imageUrl),
         prompt: encodeURIComponent(currentPrompt),
+        provider: encodeURIComponent(data.provider),
       });
       setLocation(`/result?${params.toString()}`);
     },
@@ -83,6 +84,7 @@ export default function Create() {
   };
 
   const handleGenerateBoard = () => {
+    setStep("loading");
     generateBoardMutation.mutate();
   };
 

@@ -37,6 +37,7 @@ export default function Result() {
   const searchParams = new URLSearchParams(window.location.search);
   const imageUrl = decodeURIComponent(searchParams.get("imageUrl") || "");
   const prompt = decodeURIComponent(searchParams.get("prompt") || "");
+  const provider = decodeURIComponent(searchParams.get("provider") || "");
 
   // Digital order mutation
   const digitalOrderMutation = useMutation({
@@ -148,11 +149,18 @@ export default function Result() {
             className="bg-white p-4 rounded-3xl shadow-2xl max-w-3xl mx-auto"
           >
             {imageUrl && (
-              <img
-                src={imageUrl}
-                alt="לוח החזון שלך"
-                className="w-full h-auto rounded-2xl"
-              />
+              <div className="relative">
+                {provider && (
+                  <div className="absolute top-4 right-4 bg-black/50 text-white px-3 py-1 rounded-full text-sm backdrop-blur-sm z-10">
+                    {t("result.generatedBy")} {provider}
+                  </div>
+                )}
+                <img
+                  src={imageUrl}
+                  alt="לוח החזון שלך"
+                  className="w-full h-auto rounded-2xl"
+                />
+              </div>
             )}
           </motion.div>
 
@@ -195,11 +203,20 @@ export default function Result() {
               </p>
 
               <button
-                onClick={() => setActiveModal("digital")}
-                className="w-full bg-secondary hover:bg-secondary/80 text-foreground font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
+                onClick={() => {
+                  // Direct download for now
+                  const link = document.createElement("a");
+                  link.href = imageUrl;
+                  link.download = "vision-board.png";
+                  link.target = "_blank";
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                }}
+                className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 px-6 rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Download className="w-5 h-5" />
-                {t("result.digital.button")}
+                {t("result.digital.downloadNow") || "Download Now"}
               </button>
             </motion.div>
 
