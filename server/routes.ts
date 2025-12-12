@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 // import OpenAI from "openai";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+// import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Initialize OpenAI client
 // const openai = new OpenAI({
@@ -9,10 +9,11 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 // });
 
 // Initialize Gemini client lazily
-let genAIInstance: GoogleGenerativeAI | null = null;
+let genAIInstance: any = null;
 
-function getGenAI() {
+async function getGenAI() {
   if (!genAIInstance && process.env.GOOGLE_API_KEY) {
+    const { GoogleGenerativeAI } = await import("@google/generative-ai");
     genAIInstance = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
   }
   return genAIInstance;
@@ -20,7 +21,7 @@ function getGenAI() {
 
 // Generate image prompt from dreams text
 async function generatePromptFromDreams(dreamsText: string, style: string = "corkboard"): Promise<{ prompt: string, provider: string }> {
-  const genAI = getGenAI();
+  const genAI = await getGenAI();
   if (!genAI) {
     throw new Error("Google AI client is not initialized. Check your GOOGLE_API_KEY in .env file.");
   }
@@ -177,7 +178,7 @@ async function generateImageWithGemini(prompt: string): Promise<string | null> {
   console.log("--------------------------------------------------");
   console.log("🎨 Starting Gemini Image Generation...");
 
-  const genAI = getGenAI();
+  const genAI = await getGenAI();
   if (!genAI) {
     throw new Error("Google AI client is not initialized.");
   }
