@@ -14,6 +14,7 @@ app.get('/api/health', (req, res) => {
 
 // Register routes
 registerRoutes(httpServer, app);
+console.log("Routes registered successfully");
 
 // Error handling middleware
 app.use((err: any, req: any, res: any, next: any) => {
