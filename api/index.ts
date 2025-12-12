@@ -16,6 +16,14 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 
 // Register routes
-registerRoutes(httpServer, app);
+registerRoutes(httpServer, app).catch((err) => {
+  console.error("Failed to register routes:", err);
+});
+
+// Error handling middleware
+app.use((err: any, req: any, res: any, next: any) => {
+  console.error("API Error:", err);
+  res.status(500).json({ error: "Internal Server Error", details: err.message });
+});
 
 export default app;
