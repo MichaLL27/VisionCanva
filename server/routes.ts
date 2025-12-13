@@ -29,12 +29,16 @@ async function generatePromptFromDreams(dreamsText: string, style: string = "cor
   try {
     console.log(`Using Gemini for prompt generation (Style: ${style})...`);
     
+    // Check if API key is present (do not log the actual key)
+    if (!process.env.GOOGLE_API_KEY) {
+      console.error("❌ GOOGLE_API_KEY is missing in environment variables!");
+      throw new Error("Server configuration error: Missing API Key.");
+    }
+
     const modelsToTry = [
       "gemini-2.0-flash",
-      "gemini-2.0-flash-exp",
       "gemini-1.5-flash",
-      "gemini-1.5-pro",
-      "gemini-pro"
+      "gemini-1.5-pro"
     ];
     
     let lastError = null;
