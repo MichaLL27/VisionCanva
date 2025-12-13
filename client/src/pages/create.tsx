@@ -19,6 +19,21 @@ export default function Create() {
   const { t, language } = useLocalization();
   const { toast } = useToast();
 
+  const styles = [
+    { id: "corkboard", img: "/first.jpeg", titleKey: "create.style1", descKey: "create.style1Desc", bg: "bg-amber-100" },
+    { id: "minimalist", img: "/second.jpeg", titleKey: "create.style2", descKey: "create.style2Desc", bg: "bg-gray-100" },
+    { id: "cinematic", img: "/third.jpeg", titleKey: "create.style3", descKey: "create.style3Desc", bg: "bg-slate-800" },
+    { id: "scrapbook", img: "/fourth.jpeg", titleKey: "create.style4", descKey: "create.style4Desc", bg: "bg-pink-100" },
+    { id: "neon", img: "/five.jpeg", titleKey: "create.style5", descKey: "create.style5Desc", bg: "bg-purple-900" },
+    { id: "watercolor", img: "/six.jpeg", titleKey: "create.style6", descKey: "create.style6Desc", bg: "bg-blue-100" },
+    { id: "retro", img: "/seven.jpeg", titleKey: "create.style7", descKey: "create.style7Desc", bg: "bg-orange-100" },
+    { id: "futuristic", img: "/eight.jpeg", titleKey: "create.style8", descKey: "create.style8Desc", bg: "bg-slate-900" },
+    { id: "collage", img: "/nine.jpeg", titleKey: "create.style9", descKey: "create.style9Desc", bg: "bg-yellow-100" },
+    { id: "polaroid", img: "/ten.jpeg", titleKey: "create.style10", descKey: "create.style10Desc", bg: "bg-zinc-100" },
+    { id: "magazine", img: "/eleven.jpeg", titleKey: "create.style11", descKey: "create.style11Desc", bg: "bg-red-100" },
+    { id: "abstract", img: "/twelve.jpeg", titleKey: "create.style12", descKey: "create.style12Desc", bg: "bg-indigo-100" },
+  ];
+
   const NextIcon = language === "he" ? ArrowLeft : ArrowRight;
 
   // Mutation for generating prompt
@@ -160,115 +175,31 @@ export default function Create() {
                 </p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                  {/* Option 1: Corkboard */}
-                  <div 
-                    onClick={() => {
-                      setSelectedStyle("corkboard");
-                      setStep("dreams");
-                    }}
-                    className="cursor-pointer group relative aspect-[3/4] bg-amber-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
-                  >
-                    <img 
-                      src="/first.jpeg" 
-                      alt="First Style" 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
-                      {t("create.style1")}
+                  {styles.map((style) => (
+                    <div
+                      key={style.id}
+                      onClick={() => {
+                        setSelectedStyle(style.id);
+                        setStep("dreams");
+                      }}
+                      className={`cursor-pointer group relative aspect-[3/4] ${style.bg} rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden`}
+                    >
+                      <img
+                        src={style.img}
+                        alt={t(style.titleKey)}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
+                      <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
+                        {t(style.titleKey)}
+                      </div>
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
+                        <p className="text-sm font-medium text-center text-black">
+                          {t(style.descKey)}
+                        </p>
+                      </div>
                     </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center">{t("create.style1Desc")}</p>
-                    </div>
-                  </div>
-
-                  {/* Option 2: Minimalist */}
-                  <div 
-                    onClick={() => {
-                      setSelectedStyle("minimalist");
-                      setStep("dreams");
-                    }}
-                    className="cursor-pointer group relative aspect-[3/4] bg-gray-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
-                  >
-                    <img 
-                      src="/second.jpeg" 
-                      alt="Second Style" 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
-                      {t("create.style2")}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center">{t("create.style2Desc")}</p>
-                    </div>
-                  </div>
-
-                  {/* Option 3: Cinematic */}
-                  <div 
-                    onClick={() => {
-                      setSelectedStyle("cinematic");
-                      setStep("dreams");
-                    }}
-                    className="cursor-pointer group relative aspect-[3/4] bg-slate-800 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
-                  >
-                    <img 
-                      src="/third.jpeg" 
-                      alt="Third Style" 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
-                      {t("create.style3")}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center text-black">{t("create.style3Desc")}</p>
-                    </div>
-                  </div>
-
-                  {/* Option 4: Scrapbook */}
-                  <div 
-                    onClick={() => {
-                      setSelectedStyle("scrapbook");
-                      setStep("dreams");
-                    }}
-                    className="cursor-pointer group relative aspect-[3/4] bg-pink-100 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
-                  >
-                    <img 
-                      src="/fourth.jpeg" 
-                      alt="Fourth Style" 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
-                      {t("create.style4")}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center text-black">{t("create.style4Desc")}</p>
-                    </div>
-                  </div>
-
-                  {/* Option 5: Neon */}
-                  <div 
-                    onClick={() => {
-                      setSelectedStyle("neon");
-                      setStep("dreams");
-                    }}
-                    className="cursor-pointer group relative aspect-[3/4] bg-purple-900 rounded-2xl border-2 border-transparent hover:border-primary hover:shadow-xl transition-all overflow-hidden"
-                  >
-                    <img 
-                      src="/five.jpeg" 
-                      alt="Fifth Style" 
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors" />
-                    <div className="absolute inset-0 flex items-center justify-center text-white font-display font-bold text-5xl drop-shadow-[0_4px_4px_rgba(0,0,0,0.5)] tracking-wider">
-                      {t("create.style5")}
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-4 bg-white/90 backdrop-blur-sm translate-y-full group-hover:translate-y-0 transition-transform">
-                      <p className="text-sm font-medium text-center text-black">{t("create.style5Desc")}</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               </motion.div>
             )}
